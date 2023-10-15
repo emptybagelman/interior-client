@@ -1,16 +1,19 @@
 .explore-container {
-    margin-top: 10px;
+  margin-top: 10px;
   display: grid;
- grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   margin-left: 15px;
   margin-right: 15px;
+  background-color: var(--bg);
+  margin-bottom: 25px;
 }
 
 .explore-item {
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
+  background-color: var(--bg);
 }
 
 .explore-image {
@@ -18,31 +21,29 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.2s ease-in-out;
-  border-radius: 20px; 
-   transition: transform 0.2s ease-in-out;
-   
+  border-radius: 25px; 
+  transition: 0.2s ease-in-out;   
+  background-color: var(--bg);
+  filter: brightness(0.3);
+  position: relative;
 }
 
 .explore-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
+  filter: brightness(0.8);
+  transition: 0.2s ease-in-out;
 }
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-   transform: scale(1.05);
-   
+.explore-item:hover .title{
+  font-size: 3rem;
+  transition: 0.2s ease-in-out;
 }
 
 .title {
   color: white;
   font-size: 1.5rem;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transition: 0.2s ease-in-out;
+  transform: translateX(-50%);
 }

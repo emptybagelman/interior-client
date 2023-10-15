@@ -44,8 +44,24 @@
     font-size: 1rem;
     background-color: var(--beige);
     border: none;
-    outline: 2px solid black;
+    outline: 2px solid var(--bg);
     margin-top: 25px;
     padding: 10px 25px;
     border-radius: 25px;
+    transition: 0.1s ease;
+
+}
+
+#confirm:hover{
+    background-color: rgb(88, 218, 88);
+    outline: none;
+    transition: 0.1s ease;
+    color: var(--beige);
+}
+
+#cancel:hover{
+    background-color: rgb(223, 53, 10);
+    outline: none;
+    transition: 0.1s ease;
+    color: var(--beige);
 }

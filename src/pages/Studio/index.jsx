@@ -85,7 +85,7 @@ useEffect(() => {
           }else{
             room = rooms[i].name
           }
-          rooms[i].src = `https://res.cloudinary.com/de2nposrf/image/upload/${rooms[i].fetchUID}/${rooms[i].category}/${rooms[i].user_id}/${room}/nz.png`
+          rooms[i].src = `https://res.cloudinary.com/de2nposrf/image/upload/${rooms[i].category}/${rooms[i].user_id}/${room}/nz.png`
           rooms[i].alt = 'Image 1'
           tempArr.push(rooms[i])
           counter += 1
@@ -105,19 +105,22 @@ return (
     <BackButton backTo="/explore" label="Back to Explore" />
     </div>
   
-  <div className={`studio-page${selectedImage ? ' dimmed' : ''}`}>
+  <div className={`page${selectedImage ? ' dimmed' : ''}`}>
     {roomArray.map((image, index) => (
-  <div className="studio__item-container" 
+  <div className="item-container" 
     key={index} 
     onClick={() => handleImageClick(image, index)}
     onMouseEnter={() => setHoveredImageIndex(image.id)}
     onMouseLeave={() => setHoveredImageIndex(null)}
   >
-  <img className='studio__item' src={image.src} alt={image.alt} />
-  <div className="studio__item-caption">{image.name.split("_").join(" ")}
+  <img className='item' src={image.src} alt={image.alt} />
+  <div className="item-caption">
+  <h3>{image.name.split("_").join(" ")}</h3>
+  <p>Dimensions: {image.dimensions}</p>
+  <p>Description: {image.description}</p>
+  <p>Theme: {image.theme}</p>
   {hoveredImageIndex == image.id && (
     <div className="icon-container">
-  
       <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(image.id); }}>
         <Heart isClick={likedImages[image.id]} />
       </div>

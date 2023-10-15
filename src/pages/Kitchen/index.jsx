@@ -126,16 +126,19 @@ return (
     <BackButton backTo="/explore" label="Back to Explore" />
     </div>
   
-  <div className={`kitchen-page${selectedImage ? ' dimmed' : ''}`}>
+  <div className={`page${selectedImage ? ' dimmed' : ''}`}>
     {roomArray.map((image, index) => (
-  <div className="kitchen__item-container" 
+  <div className="item-container" 
     key={index} 
     onClick={() => handleImageClick(image, index)}
     onMouseEnter={() => setHoveredImageIndex(image.id)}
     onMouseLeave={() => setHoveredImageIndex(null)}
   >
-  <img className='kitchen__item' src={image.src} alt={image.alt} />
-  <div className="kitchen__item-caption">{image.name.split("_").join(" ")}
+  <img className='item' src={image.src} alt={image.alt} />
+  <div className="item-caption">{image.name.split("_").join(" ")}
+  <p>Dimensions: {image.dimensions}</p>
+  <p>Description: {image.description}</p>
+  <p>Theme: {image.theme}</p>
   {hoveredImageIndex == image.id && (
     <div className="icon-container">
   

@@ -96,10 +96,10 @@ font-size: 18px;
   justify-content: center;
   text-align: center;
   align-items: center;
- margin-top: 5vh;
- overflow-y: auto;
- width: 80vw; 
- height: 100%;
+  margin-top: 5vh;
+  overflow-y: auto;
+  width: 80vw; 
+  height: 100%;
 }
 
 /* arrow buttons that  made after the grid testing but taken out for now - leaving here until fix the arrow bug */
@@ -221,7 +221,7 @@ cursor: pointer;
     /* overflow-y: auto; */
 }
 
-.kitchen-page, .bedroom-page, .bathroom-page, .garden-page, .bathroom-page, .studio-page, .living-page {
+.page{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   grid-gap: 30px;
@@ -233,9 +233,8 @@ cursor: pointer;
 overflow-y: hidden;
 }
 
-.bedroom-page > div:nth-child(2n), .studio-page > div:nth-child(2n), .bathroom-page > div:nth-child(2n), .gardentudio-page > div:nth-child(2n), .living-page > div:nth-child(2n), .kitchen-page > div:nth-child(2n) {
+.page > div:nth-child(2n){
   grid-column-end: span 2; 
-  /* grid-column-end: span 2; */
 }
 
 @media screen and (max-width: 767px) {
@@ -245,17 +244,66 @@ overflow-y: hidden;
   }
 }
 
-.kitchen__item, .bedroom__item, .bathroom__item, .garden__item, .studio__item, .living__item {
-  margin-top: 10px;
+.item-container{
+  position: relative;
+  border-radius: 20px;  
+  overflow: hidden; 
+  transition: transform 0.2s ease-in-out;
+}
+
+.item-caption{
+  color: var(--beige);
+  background-color: rgba(0,0,0,0.8);
+  width: 100%;
+  text-align: left;
+  font-family: 'Space Grotesk', sans-serif;
+  position: absolute;
+  top: 85%;
+  padding-left: 15px;
+  height: 100%;
+  transition: 0.2s ease-in-out;
+}
+
+.item-container:hover .item-caption{
+  top: 40%;
+  height: 100%;
+  transition: 0.2s ease-in-out;
+}   
+
+.item-caption>h3{
+  font-weight: normal;
+  font-size: 1.5rem;
+  transition: 0.2s ease-in-out;
+  padding-top: 5px;
+}
+
+.item-container:hover  .item-caption>h3{
+  padding-left: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.item-caption>p{
+  display: none;
+}
+
+.item-container:hover .item-caption>p{
+  display: flex;
+  flex-direction: column;
+  padding-left: 35px;
+}
+
+.item{
+  /* margin-top: 10px; */
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.2s ease-in-out;
   border-radius: 20px;
 }
 
-.kitchen__item:hover, .bedroom__item:hover, .bathroom__item:hover, .garden__item:hover, .bathroom__item:hover, .studio__item:hover, .living__item:hover {
-  transform: scale(0.97);
+.item-container:hover{
+  transform: scale(0.98);
+  transition: transform 0.2s ease-in-out;
+
 }
 
 .fullscreen-content {
@@ -313,9 +361,8 @@ overflow-y: hidden;
   padding: 10px 20px;
   font-size: 30px;
   cursor: pointer;
-  outline: solid 2px var(--outline);
   border-radius: 100px;
-  border-color: #009688;
+  border: none;
   display: flex;
   align-items: center;
   transition: all 0.2s ease-in-out;
@@ -324,38 +371,21 @@ overflow-y: hidden;
 .close-button:hover {
   cursor: pointer;
   border-width: 0.3rem;
-  background-color: gray;
+  background-color: var(--beige);
+  filter: invert();
 }
 
 
-.bedroom__item-container, .kitchen__item-container, .garden__item-container, .bathroom__item-container, .studio__item-container, .living__item-container {
-  background-color:#f4f4f4;
-  position: relative;
-  border: 1px solid #e0e0e0;  
-  border-radius: 20px;  
-  overflow: hidden; 
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom:50px; 
-  transition: box-shadow 0.3s; 
-}
 
-.bedroom__item-caption, .kitchen__item-caption, .garden__item-caption, .bathroom__item-caption, .studio__item-caption, .living__item-caption  {
-  padding-bottom: 6px;
-  color: black;
-  width: 100%;
-  text-align: left;
-  font-family: Arial, Helvetica, sans-serif;
-  left: 15px
-}
 
-.bedroom-page.dimmed .bedroom__item, 
-.bedroom-page.dimmed .bedroom__item-caption, .kitchen-page.dimmed .kitchen__item
-.kitchen-page.dimmed .kitchen-caption, .garden-page.dimmed .garden__item 
+.page.dimmed .item, 
+.page.dimmed .item-caption
+/* .kitchen-page.dimmed .kitchen__item .kitchen-page.dimmed .kitchen-caption, .garden-page.dimmed .garden__item 
 .garden-page.dimmed .garden-caption, .bathroom-page.dimmed .bathroom__item 
 .bathroom-page.dimmed .bathroom-caption, .studio-page.dimmed .studio__item, 
 .studio-page.dimmed .studio-caption, .living-page.dimmed .living__item, 
-.living-page.dimmed .living-caption {
+.living-page.dimmed .living-caption  */
+{
   background-color: black;
   opacity: 1;
   overflow-y: hidden;
@@ -367,7 +397,7 @@ overflow-y: hidden;
   overflow-y: hidden;
 }
 
-.bedroom-page.dimmed .bedroom__item-container, .kitchen-page.dimmed .kitchen-container, .garden-page.dimmed .garden-container, .bathroom-page.dimmed .bathroom-container, .studio-page.dimmed .studio-container, .living-page.dimmed .living-container {
+.page.dimmed .item-container{
   pointer-events: none; 
   background-color: black;
   opacity: 1;
@@ -401,7 +431,7 @@ align-items: center;
 
 .icon-container {
   position: absolute;
-  bottom: -34px; 
+  top: 0px; 
   right: 5px; 
   display: flex;
   align-items: flex-end;
@@ -427,7 +457,7 @@ align-items: center;
     border-radius: 50px;
     display: flex;
     align-items: center;
-    background: rgb(240, 240, 240, 0.1);
+    /* background: rgb(240, 240, 240, 0.1); */
     z-index: 10; 
     font-family: Arial, Helvetica, sans-serif;
 }
