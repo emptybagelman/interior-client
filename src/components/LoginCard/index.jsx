@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { QuestionHelp } from '../../components'
 
 const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
-    const baseUrl = 'http://localhost:5000/'
+    const baseUrl = 'https://inspiremyserver.onrender.com/'
     const [username, setUsername] = useState("")
     const [password,setPassword] = useState("")
     const { setUser } = useAuth()

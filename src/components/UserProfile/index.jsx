@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 import axiosInstance from '../../helpers';
 import "./style.css"
 import { EditOverlay, DeleteOverlay } from "../../components"
+import axios from 'axios';
 
-const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1, setRefresh }) => {
+const UserProfile = ({ user, userRooms, loading, updateUser, imageUrl1, setImageUrl1, setRefresh }) => {
   const inputRef = useRef(null)
   // const [image, setImage] = useState(null)
   const [newUsername, setNewUsername] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [editProfileVisible, setEditProfileVisible] = useState(false)
   const [likesVisible, setLikesVisible] = useState(true)
+  const [createdRooms, setCreatedRooms] = useState([])
   const [likedRooms,setLikedRooms] = useState([])
   const [hoverImage,setHoverImage] = useState(null)
 
@@ -18,7 +20,7 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
 
   const [toggleDeleteBtn,setToggleDeleteBtn] = useState(false)
 
-  async function getLikedRooms() {
+  async function getUserRooms() {
     const rooms = []
     const x = await axiosInstance("/rooms").then(resp => {
       const data = resp.data.rooms
@@ -27,13 +29,33 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
           rooms.push(data[i])
         }
       }
-      setLikedRooms(rooms)
+      setCreatedRooms(rooms)
     })
   }
 
+  async function getLikedRooms(){
+    const likes = []
+    const rooms = []
+    const x = await axiosInstance("/likes").then(resp => {
+      const data = resp.data.likes
+      for(let i=0;i<data.length;i++){
+        if(data[i].user_id == user.id){
+          likes.push(data[i].room_id)
+        }
+      }
+    })
+    for(let i=0;i<likes.length;i++){
+      const y = await axiosInstance(`/rooms/${likes[i]}`).then(resp => {
+        rooms.push(resp.data.data)
+      })
+    }
+    setLikedRooms(rooms)
+  }
+
   useEffect(() => {
+    getUserRooms()
     getLikedRooms()
-  }, [likes]);
+  }, [userRooms,likedRooms]);
 
   const handleClick = () => {
     inputRef.current.click();
@@ -133,7 +155,7 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
                 <h4>{user.username}</h4>
                 <h5 id='profile-email'>Email: {user.email}</h5>
                 <div style={{padding: 0, paddingTop: "40px"}} className='main-content-nav'>
-                  <h5 className={likesVisible ? 'active' : ''} onClick={toggleLikes} id='sidebar-likes' role='heading3'>Likes</h5>
+                  <h5 className={likesVisible ? 'active' : ''} onClick={toggleLikes} id='sidebar-likes' role='heading3'>Rooms</h5>
                   <h5 className={editProfileVisible ? 'active' : ''} onClick={toggleEditProfile} id="sidebar-heading" role='heading2'>Edit Profile</h5>
                   
                 </div>
@@ -163,45 +185,76 @@ const UserProfile = ({ user, likes, loading, updateUser, imageUrl1, setImageUrl1
                   </button>
                 </div>
                 
-                
-                <div style={{ display: likesVisible ? 'flex' : 'none', paddingTop: "30px" }}>
-                  {/* <h3 id='likes' role='heading4'>Likes</h3> */}
-                  <div id='likes-container' style={likedRooms.length < 1 ? {"display":"flex","alignItems":"center"} : {}}>
-                    {likedRooms.length < 1
-                    ? (
-                      <p>You have not liked any rooms.<br></br> <Link to={`/explore`}><button>Find Rooms</button></Link></p>
-                    ) 
-                    : (
-                      likedRooms.map((room, index) => (
-                        <div className='card-wrapper'>
-                          <Link 
-                          className="imgs-container" 
-                          style={{textDecoration: "none"}} 
-                          key={index} 
-                          to={`/${room.category}`}
-                          onMouseEnter={() => setHoverImage(room.id)}
-                          onMouseLeave={() => setHoverImage(null)}>
-                            <img src={`https://res.cloudinary.com/de2nposrf/image/upload/${room.category}/${room.user_id}/${room.name}/nz.png`} className="likes-img" alt="" /> 
-                            <p key={index} id='profile-imgs-text'>{room.name.split("_").join(" ")}</p>
-                            
-                          </Link>
-                          {hoverImage == room.id && (
-                            <div
-                            className="config"
+                <div className="both-cont">
+                  <div id='left-rooms-container' style={{ display: likesVisible ? 'flex' : 'none', paddingTop: "30px" }}>
+                    <h3>Your Rooms</h3>
+                    <div id='user-rooms-container' style={createdRooms.length < 1 ? {"display":"flex","alignItems":"center"} : {}}>
+                      {createdRooms.length < 1
+                      ? (
+                        <p>You have not posted any rooms.<br></br> <Link to={`/create`}><button>Create A Room</button></Link></p>
+                      ) 
+                      : (
+                        createdRooms.map((room, index) => (
+                          <div className='card-wrapper'>
+                            <Link 
+                            className="imgs-container" 
+                            style={{textDecoration: "none"}} 
+                            key={index} 
+                            to={`/${room.category}`}
                             onMouseEnter={() => setHoverImage(room.id)}
-                            onMouseLeave={() => setHoverImage(null)}
-                            >
-                              <p id="edit">⚙</p>
-                              <p id='delete' onClick={() => toDelete(room)}>-</p>
-                            </div>
-                          )}
-                        </div>
-                      ))
+                            onMouseLeave={() => setHoverImage(null)}>
+                              <img src={`https://res.cloudinary.com/de2nposrf/image/upload/${room.category}/${room.user_id}/${room.name}/nz.png`} className="room-img" alt="" /> 
+                              <p key={index} id='profile-imgs-text'>{room.name.split("_").join(" ")}</p>
+                              
+                            </Link>
+                            {hoverImage == room.id && (
+                              <div
+                              className="config"
+                              onMouseEnter={() => setHoverImage(room.id)}
+                              onMouseLeave={() => setHoverImage(null)}
+                              >
+                                <p id="edit">⚙</p>
+                                <p id='delete' onClick={() => toDelete(room)}>-</p>
+                              </div>
+                            )}
+                          </div>
+                        ))
 
-                    )}
-                      
+                      )}
+                        
+                    </div>
+
                   </div>
-
+                  <div id="right-rooms-container" style={{ display: likesVisible ? 'flex' : 'none', paddingTop: "30px" }}>
+                    <h3>Likes</h3>
+                    <div id="likes-container" style={likedRooms.length < 1 ? {"display":"flex","alignItems":"center"} : {}}>
+                      {likedRooms.length < 1
+                      ? (
+                        <p>You have not liked any rooms.<br></br>
+                          <Link to={`/explore`}>
+                            <button>Find Rooms</button>
+                          </Link>
+                        </p>
+                      )
+                      : (
+                        likedRooms.map((room,index) => (
+                          
+                          <div className="card-wrapper">
+                            <Link 
+                            className="imgs-container" 
+                            style={{textDecoration: "none"}} 
+                            key={index} 
+                            to={`/${room.category}`}>
+                              <img src={`https://res.cloudinary.com/de2nposrf/image/upload/${room.category}/${room.user_id}/${room.name}/nz.png`} className="room-img" alt="" /> 
+                              <p key={index} id='profile-imgs-text'>{room.name.split("_").join(" ")}</p>
+                              
+                            </Link>
+                          </div>
+                        ))
+                      )
+                    }
+                    </div>
+                  </div>
                 </div>
               </div>
             </>

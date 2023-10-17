@@ -3,7 +3,7 @@ import "./style.css"
 import { QuestionHelp } from "../../components" 
 
 const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) => {
-    const baseUrl='http://localhost:5000/'
+    const baseUrl='https://inspiremyserver.onrender.com/'
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password,setPassword] = useState("")

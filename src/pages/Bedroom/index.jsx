@@ -143,7 +143,8 @@ useEffect(() => {
       onMouseLeave={() => setHoveredImageIndex(null)}
     >
     <img className='item' src={image.src} alt={image.alt} />
-    <div className="item-caption">{image.name.split("_").join(" ")}
+    <div className="item-caption">
+    <h3>{image.name.split("_").join(" ")}</h3>
     <p>Dimensions: {image.dimensions}</p>
     <p>Description: {image.description}</p>
     <p>Theme: {image.theme}</p>

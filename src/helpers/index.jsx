@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let axiosInstance = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://inspiremyserver.onrender.com'
 });
 
 axiosInstance.defaults.headers.common["Access-Control-Allow-Origin"] = "*"

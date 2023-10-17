@@ -6,7 +6,7 @@ import axios from "axios";
 import './profile.css'
 
 const Profile = () => {
-  const baseUrl = 'http://localhost:5000'
+  const baseUrl = 'https://inspiremyserver.onrender.com/'
   const { usersUsername, setUsersUsername } = useAuth()
   const { user } = useAuth()
   const navigate = useNavigate()
@@ -76,7 +76,7 @@ const Profile = () => {
 
   return (
     <>
-      <UserProfile imageUrl1={imageUrl1} setImageUrl1={setImageUrl1} updateUser={updateUser} loading={loading} user={userData} likes={likes} setRefresh={setRefresh}/>
+      <UserProfile imageUrl1={imageUrl1} setImageUrl1={setImageUrl1} updateUser={updateUser} loading={loading} user={userData} userRooms={likes} setRefresh={setRefresh}/>
     </>
     
   )
