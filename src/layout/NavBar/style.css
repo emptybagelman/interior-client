@@ -4,16 +4,9 @@
     justify-content: space-between;
     height: 60px;
     font-family: 'Space Grotesk', sans-serif;
-    /* background-color:#FAF8F2; */
     padding: 5px;
 }
 
-/* .nav-row h2{
-    font-size: 2rem;
-    color: #009688;
-    margin-left: 50px;
-    
-} */
 
 .nav-row ul{
     display: flex;
@@ -56,11 +49,14 @@
 #logo{
     max-width:250px ;
     max-height: 300px;
-    filter: invert();
+    filter: invert(1);
     margin-left: 20px;
 }
 
-/* styling for the three-container - this is the canvas it sits on the page, not the page layout  */
+@media screen and (max-width:800px){
 
-
-
+    .nav-row a{
+        font-size: 0.7rem;
+        padding: 6px 30px;
+    }
+}

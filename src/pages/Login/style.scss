@@ -9,10 +9,10 @@
     justify-content: space-around;
     align-items: center;
     overflow: hidden;
+    position: relative;
 }
 
 .card{
-    /* background-color: ; */
     width: 50%;
     height: 55%;
     display: flex;
@@ -38,5 +38,22 @@
     .card{
         height: 60%;
         margin-top: 5%;
+    }
+}
+
+@media screen and (max-width:850px){
+    #login-page{
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card{
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 80%;
+        height: 80%;
+        padding: 0;
+        margin: 0;
     }
 }

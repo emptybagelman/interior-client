@@ -47,3 +47,19 @@
   transition: 0.2s ease-in-out;
   transform: translateX(-50%);
 }
+
+@media screen and (max-width:1110px){
+  .title{
+    font-size: 1.2rem;
+  }
+
+  .explore-item:hover .title{
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width:800px){
+  .explore-container{
+    grid-template-columns: repeat(2,1fr);
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import Environment from "../../components/Homepage/Environment";
-import "./home.css";
+import "./home.scss";
 import * as THREE from "three";
 import { OrbitControls, useScroll } from "@react-three/drei";
 import { House } from "../../components/Homepage";

@@ -8,6 +8,8 @@ const NavBar = () => {
 
   const { user, setUser } = useAuth();
 
+  const [width,setWidth] = useState(window.innerWidth)
+
   const activeStyle = {
     outline: "solid 2px #FAF8F2",
     backgrounColor: "var(--outline)",
@@ -22,7 +24,7 @@ const NavBar = () => {
   return (
     <>
       <nav className="nav-row">
-        <img id="logo" src='https://res.cloudinary.com/de2nposrf/image/upload/v1697042188/static/logo.png' alt="API Image" />
+        <img id="logo" src={width <= 800 ? 'https://res.cloudinary.com/de2nposrf/image/upload/v1697042188/static/small_logo.png' : 'https://res.cloudinary.com/de2nposrf/image/upload/v1697042188/static/logo.png'} alt="API Image" />
 
         <ul>
           <li>

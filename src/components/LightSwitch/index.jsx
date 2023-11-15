@@ -5,7 +5,7 @@ import "./style.scss"
 const LightSwitch = ({ changeState, toggleSwitch }) => {
 
     const [ usePull, setUsePull ] = useState(false)
-    const [style,setStyle] = useState("")
+    const [style,setStyle] = useState({"transform":"translateY(0px)"})
 
     const shadedStyle = {
         "background": "linear-gradient(90deg, rgba(250,248,242,1) 0%, rgba(73,71,91,1) 95%)",

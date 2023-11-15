@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './style.css'; 
+import './style.scss'; 
 import { motion } from 'framer-motion';
 import { useRoom } from '../../contexts';
 
