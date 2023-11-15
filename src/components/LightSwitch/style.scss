@@ -1,5 +1,5 @@
 .switch-container{
-    width: 200px;
+    width: 400px;
     height: 300px;
     background-color: var(--outline);
     display: flex;
@@ -75,5 +75,40 @@
     margin: 5px;
     background: #EDE4D9;
     border-radius: 5px;
-    box-shadow: inset 3px -3px 0px 5px rgb(180, 186, 199);
+    box-shadow: inset 1px -3px 2px 5px #b9b5b0;
+}
+
+@media (max-width: 1366px){
+    .switch-container{
+        height: 220px;
+    }
+
+    #mainbit{
+        width: 80px;
+        height: 208px;
+        top: -20px;
+        left: 8px;
+    }
+
+    #shadedbit{
+        width: 86px;
+        height: 112px;
+        bottom: -233px;
+        left: 5px;
+    }
+
+    .spacebar{
+        width: 220px;
+        height: 35px;
+    }
+    #login-label,
+    #register-label{
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .switch-container{
+        display: none;
+    }
 }

@@ -1,0 +1,147 @@
+#signup {
+    h2{
+        font-size: 2.4rem;
+        color: #14080E;
+        text-align: center;
+        padding-top: 100px;
+    }
+
+    header>p{
+        margin-bottom: 150px;
+    }
+
+    form{
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 23%
+    }
+
+    label{
+        font-size: 0.8rem;
+        color: #14080E;
+        align-self: start;
+    }
+
+    button{
+        font-size: 0.8rem;
+        border: 2px solid var(--outline);
+        padding: 10px 25px;
+        outline: none;
+        border-radius: 25px;
+        cursor: pointer;
+        background-color: var(--bg);
+        color:  #14080E;
+        font-family: inherit;
+        background-color: #FAF8F2;
+
+        &:hover{
+            background-color: black;
+            border: 2px solid var(--beige);
+            color: var(--beige);
+        }
+
+    }
+}
+
+.signup-input{
+    width: 100%;
+    height: 2rem;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    border-radius: 25px;
+    background-color: var(--bg);
+    color: whitesmoke;
+    border: 1px solid #49475B;
+}
+
+.lamp{
+    position: absolute;
+    top: -55%;
+    scale: 40%;
+}
+
+#right-lamp{
+    position: relative;
+    filter: brightness(0.2);
+}
+
+#rlight{
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -80px;
+    width: 800px;
+    height: 300px;
+    background: radial-gradient(ellipse at 50% 100px, rgba(255, 255, 235,0.95) 20%, rgba(80,92,103,0) 60%);
+}
+
+.error{
+    border: solid 1px red;
+}
+
+// tablet
+@media (max-width: 768px){
+
+}
+
+// 1920 x1080
+@media (max-width: 1920px){
+    #signup{
+        h2{
+            font-size: 2rem;
+            padding-top: 25%;
+        }
+
+        .lamp{
+            scale: 30%;
+            top: -65%;
+        }
+
+        label{
+            font-size: 0.6rem;
+        }
+
+        input{
+            height: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 0.6rem;
+            margin-top: 10%;
+        }
+    }
+}
+
+@media (max-width: 1366px){
+    #signup{
+        h2{
+            font-size: 1.4rem;
+            padding-top: 25%;
+        }
+
+        .lamp{
+            scale: 25%;
+            top: -360px;
+        }
+
+        label{
+            font-size: 0.6rem;
+        }
+
+        input{
+            height: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        button {
+            font-size: 0.6rem;
+            padding: 10px 20px;
+        }
+    }
+}

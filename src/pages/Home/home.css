@@ -1,7 +1,7 @@
 #home-container {
   display: flex;
-  justify-content: space-between; /* Space between left and right content */
-  align-items: flex-start; /* Align content to the top */
+  /* justify-content: space-around; 
+  align-items: flex-start;  */
   text-align: center;
 }
 
@@ -22,7 +22,8 @@
   margin-top: 100px;
 }
   #right-content {
-    width: 100%; /* Take up the full width of the container */
+    width: 50%; /* Take up the full width of the container */
+    height: 100vh;
     display: flex;
     justify-content: center;
     position: sticky; /* Make it sticky */

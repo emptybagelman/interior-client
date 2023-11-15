@@ -17,7 +17,7 @@ const House = ({ scrollY, ...props }) => {
   
   // Add rotation
   useFrame(() => {
-    csg.current.rotation.y -= 0.02; // Adjust rotation as needed
+    csg.current.rotation.y -= 0.01; // Adjust rotation as needed
 
     // Get the current position of the object
     //const currentY = csg.current.children[0].children[9].position.y;
@@ -45,7 +45,6 @@ const House = ({ scrollY, ...props }) => {
     // Determine the target colors based on the scroll position
     const sectionHeight = 700; // Height of each text section
     const sectionIndex = Math.floor(scrollY / sectionHeight);
-    console.log(scrollY, sectionIndex)
     let targetColors;
   
     if (sectionIndex === 1) {

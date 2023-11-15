@@ -1,5 +1,6 @@
 #login-page{
     height: 100vh;
+    width: 100vw;
     padding: 0;
     margin: 0;
     color: #FAF8F2 ;
@@ -12,7 +13,7 @@
 
 .card{
     /* background-color: ; */
-    width: 30%;
+    width: 50%;
     height: 55%;
     display: flex;
     flex-direction: column;
@@ -24,4 +25,18 @@
     border: 2px solid var(--outline);
     z-index: 2;
     perspective: 500px;
+}
+
+@media (max-width:1920px){
+    .card{
+        height: 70%;
+        margin-top: 5%;
+    }
+}
+
+@media (max-width: 1366px){
+    .card{
+        height: 60%;
+        margin-top: 5%;
+    }
 }

@@ -1,8 +1,8 @@
 import React,{ useRef, useState } from 'react'
-import "./style.css"
+import "./style.scss"
 import { QuestionHelp } from "../../components" 
 
-const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) => {
+const SignupCard = ({ toggleSwitch, focusStyle, setToggleSwitch,changeState }) => {
     const baseUrl='https://inspiremyserver.onrender.com/'
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
@@ -102,7 +102,7 @@ const SignupCard = ({ cardHeight, toggleSwitch, focusStyle, setToggleSwitch }) =
     }
 
   return (
-    <div id='signup' className="card" style={Object.assign({"height":cardHeight},toggleSwitch ? focusStyle : {"color":"var(--outlinefocus)"})}>
+    <div id='signup' className="card" style={Object.assign(toggleSwitch ? focusStyle : {"color":"var(--outlinefocus)"})}>
         <div className="lamp">
             <img src="https://res.cloudinary.com/de2nposrf/image/upload/v1697042277/static/lamp.png" alt="lamp" id='right-lamp' style={toggleSwitch ? lampShade : {}}/>
             <div id="rlight" style={toggleSwitch ? showLight : {}}></div>

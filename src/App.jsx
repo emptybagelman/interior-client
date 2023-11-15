@@ -4,15 +4,18 @@ import * as Pages from './pages';
 import { NavBar } from './layout'
 import { Routes, Route } from "react-router-dom"
 import "./App.css"
-import { useAuth } from './contexts';
+import { useAuth, useRoom } from './contexts';
 import ProtectedRoute from './routes';
 
-const Bedroom = lazy(() => import("./pages/Bedroom"))
-const Studio = lazy(() => import("./pages/Studio"))
-const Kitchen = lazy(() => import("./pages/Kitchen"))
-const Bathroom = lazy(() => import("./pages/Bathroom"))
-const Garden = lazy(() => import("./pages/Garden"))
-const Living = lazy(() => import("./pages/Living"))
+const Explore = lazy(() => import("./pages/Explore"))
+const Category = lazy(() => import("./pages/SubRoom"))
+
+// const Bedroom = lazy(() => import("./pages/Bedroom"))
+// const Studio = lazy(() => import("./pages/Studio"))
+// const Kitchen = lazy(() => import("./pages/Kitchen"))
+// const Bathroom = lazy(() => import("./pages/Bathroom"))
+// const Garden = lazy(() => import("./pages/Garden"))
+// const Living = lazy(() => import("./pages/Living"))
 
 
 export default function App() {
@@ -38,13 +41,14 @@ export default function App() {
         <Routes>
           <Route path="/" element={<NavBar/>}>
             <Route index element={<Pages.Home/>}/>
-            <Route path='Explore' element={<Pages.Explore/>}/>
-              <Route path='bedroom' element={<Bedroom/>}/>
+            <Route path='Explore' element={<Explore/>}/>
+            <Route path="category" element={<Category/>}/>
+              {/* <Route path='bedroom' element={<Bedroom/>}/>
               <Route path='studio' element={<Studio/>}/>
               <Route path='kitchen' element={<Kitchen/>}/>
               <Route path='bathroom' element={<Bathroom/>}/>
               <Route path='garden' element={<Garden/>}/>
-              <Route path='living' element={<Living/>}/>
+              <Route path='living' element={<Living/>}/> */}
             <Route path='Login' element={<Pages.Login />}/>
             <Route path='generate' element={<ProtectedRoute redirectTo="/Login"/>}>
               <Route index element={ <Pages.GenerateRoom /> }/>

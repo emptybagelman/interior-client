@@ -4,11 +4,12 @@
     top: 0;
     z-index: 10;
     width: 95%;
-    height: 100%;
-    overflow: hidden;
+    height: 100vh;
     background-color: rgba(18, 7, 13,0.5);
     display: flex;
     justify-content: center;
+    overflow: hidden;
+
 }
 
 #delete-wrapper{

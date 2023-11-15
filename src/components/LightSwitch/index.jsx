@@ -1,24 +1,27 @@
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
 import sound from "../../assets/audio/lightswitch.wav"
-import "./style.css"
+import "./style.scss"
 
 const LightSwitch = ({ changeState, toggleSwitch }) => {
 
+    const [ usePull, setUsePull ] = useState(false)
+    const [style,setStyle] = useState("")
+
     const shadedStyle = {
         "background": "linear-gradient(90deg, rgba(250,248,242,1) 0%, rgba(73,71,91,1) 95%)",
-        "width": "108px",
-        "height": "140px",
-        "left": "-4px",
-        "top": "-65px",
+        "width": "81px",
+        "height": "138px",
+        "left": "8px",
+        "top": "-37px",
         "transform": "rotateX(85deg)"
     }
 
     const mainStyle = {
         "background": "linear-gradient(180deg, rgba(250,248,242,1) 0%, rgba(73,71,91,1) 97%)",
-        "top": "-23px",
-        "left":"-2px",
-        "width": "103px",
-        "height": "290px",
+        "top": "12px",
+        "left":"8px",
+        "width": "80px",
+        "height": "218px",
         "transform": "rotateX(-40deg)"
     }
 
@@ -26,22 +29,54 @@ const LightSwitch = ({ changeState, toggleSwitch }) => {
         new Audio(sound).play()
     }
 
+    function mouseDownEvent(){
+        setStyle({"transform":"translateY(50px)"})
+    }
+
+    function mouseUpEvent(){
+        setStyle({"transform":"translateY(0px)"})
+    }
+
+
+    useEffect(() => {
+        const handleResize = () => {
+          if(window.innerWidth < 1024){
+            setUsePull(true)
+          }else{
+            setUsePull(false)
+          }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+
 
   return (
     <>
+        { usePull
+        ?
+        <div className="pull-container" onClick={() => {changeState();playAudio()}} onMouseDown={mouseDownEvent} onMouseUp={mouseUpEvent} style={style}>
+            <div id="cord"></div>
+            <div id="bob"></div>
+            <h4>Click to Switch</h4>
+        </div>
+        :
         <div data-testid={"container"} className="switch-container">
-            <h4 id='login-label'>Click To Switch</h4>
-            <div className="switch" onClick={() => {changeState();playAudio()}}>
-                <div id="toggle">
-                    <div id="mainbit" style={toggleSwitch ? mainStyle : {}}></div>
-                    <div id="shadedbit" style={toggleSwitch ? shadedStyle : {}}></div>
-                </div>
-            </div>
-            <div id='register-label' className="spacebar-graphic">
-                <p>Or Press Space</p>
-                <div className="spacebar"></div>
+        <h4 id='login-label'>Click To Switch</h4>
+        <div className="switch" onClick={() => {changeState();playAudio()}}>
+            <div id="toggle">
+                <div id="mainbit" style={toggleSwitch ? mainStyle : {}}></div>
+                <div id="shadedbit" style={toggleSwitch ? shadedStyle : {}}></div>
             </div>
         </div>
+        <div id='register-label' className="spacebar-graphic">
+            <p>Or Press Space</p>
+            <div className="spacebar"></div>
+        </div>
+    </div> 
+    }
     </>
 
   )

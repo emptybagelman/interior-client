@@ -1,0 +1,454 @@
+
+:root{
+  --bg: hsl(263, 67%, 2%);
+  --fg: hsl(244, 11%, 50%);
+  --outline: rgba(25,23,30);
+  --outlinefocus: rgba(170,171,172);
+  --font : #009688;
+  font-size: 24px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+} 
+
+
+
+.room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 70px);
+
+}
+
+/* marker on the screen general styling - will add a second class to this so all are the same styling but will hold different information */
+.point {
+  position: absolute;
+  top: 50%;
+  left: 50%
+}
+
+/* hovering over marker text */
+.point:hover .text {
+  opacity: 1;
+}
+
+/* styling of the label - this is the number it is */
+.point .label {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #00000077;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  line-height: 40px;
+  font-weight: 100;
+  font-size: 18px;
+}
+
+/* styling of the text itself (when hovered on) */
+.point .text {
+  /* display: none; */
+  position: absolute;
+  top: 30px;
+  left: -120px;
+  width: 200px;
+  padding: 20px;
+  border-radius: 4px;
+  background: #00000077;
+  color: #ffffff;
+  line-height: 1.3em;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-weight: 100;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+
+.like-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+
+/* opacity of text when visibible - regarding the useState in the marker component  */
+.text.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.environment-map-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* new styling for separate grid items - in environment map component and styling of the map itself */
+.environment-map {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  canvas{
+    width: 100%;
+  }
+}
+
+.favourites {
+  margin-top: 33px;
+  margin-left: 20px;
+}
+
+
+.like-bar {
+  display: flex;
+  flex-wrap: wrap;
+  color: white; 
+  margin-top: 5%;
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  bottom: 0;
+  background-color: var(--bg);
+  opacity: 0.8;
+}
+
+.comments-button {
+  width: 300px;
+  height: 50px;
+  margin-top: 24px;
+  font-size: 0.7rem;
+  text-decoration: none;
+  margin-right: 60px;
+  outline: solid 1px var(--outline);
+  padding: 12px 60px;
+  border-radius: 100px;
+}
+
+.email-button {
+  width: 54px;
+  height: 50px;
+   
+  border-radius: 30px;
+  background-color: #009688;
+  outline: solid 1px var(--outline);
+  font-size: 0.9em;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+   margin-left: -32px;
+}
+
+.comments-button:hover{
+  cursor: pointer;
+  background-color: #009688;
+  outline: solid 2px var(--outlinefocus);
+  
+}
+
+.email-button:hover{
+  cursor: pointer;
+  background-color: white;
+  /* outline: solid 2px var(--outlinefocus); */
+  
+}
+
+.center-page-room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh; 
+  width: 100vw; 
+}
+
+.page{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 30px;
+  margin-left: 120px;
+  margin-right: 120px;
+  margin-top: 40px;
+  row-gap: 25px;
+  grid-auto-rows: 400px;
+}
+
+.page > div:nth-child(2n){
+  grid-column-end: span 2; 
+}
+
+
+
+.item-container{
+  position: relative;
+  border-radius: 20px;  
+  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+.item-caption{
+  color: var(--beige);
+  background-color: rgba(0,0,0,0.8);
+  width: 100%;
+  text-align: left;
+  font-family: 'Space Grotesk', sans-serif;
+  position: absolute;
+  top: 85%;
+  padding-left: 15px;
+  height: 100%;
+  transition: 0.2s ease-in-out;
+}
+
+.item-container:hover .item-caption{
+  top: 40%;
+  height: 100%;
+  transition: 0.2s ease-in-out;
+}   
+
+.item-caption>h3{
+  font-weight: normal;
+  font-size: 1.3rem;
+  transition: 0.2s ease-in-out;
+  padding-top: 5px;
+}
+
+.item-container:hover  .item-caption>h3{
+  padding-left: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.item-caption>p{
+  display: none;
+  font-size: 0.8rem;
+}
+
+.item-container:hover .item-caption>p{
+  display: flex;
+  flex-direction: column;
+  padding-left: 25px;
+}
+
+.item{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.item-container:hover{
+  transform: scale(0.98);
+  transition: transform 0.2s ease-in-out;
+
+}
+
+.fullscreen-div {
+    margin-top: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;  
+    // transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &>div{
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+}
+
+
+
+
+.fullscreen-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.description {
+    margin: 10px 0;
+    color: white;
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;  
+}
+
+.close-button {
+  font-family: 'Space Grotesk', sans-serif;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  padding: 10px 20px;
+  font-size: 30px;
+  cursor: pointer;
+  border-radius: 100px;
+  border: none;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  background-color: var(--beige);
+  outline: solid 1px var(--bg);
+}
+
+.close-button:hover {
+  cursor: pointer;
+  border-width: 0.3rem;
+  filter: invert(1);
+}
+
+
+
+
+.page.dimmed .item, 
+.page.dimmed .item-caption
+{
+  background-color: black;
+  opacity: 1;
+}
+
+.bedroom__item-container.dimmed {
+  background-color: black;
+  opacity: 1;
+
+}
+
+.page.dimmed .item-container{
+  pointer-events: none; 
+  background-color: black;
+  opacity: 1;
+
+}
+
+.title-section {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.room-title {
+  color:white;
+  margin-top: 50px;
+  margin-left: 125px;
+  margin-bottom: 10px
+}
+
+.back-to-button {
+  margin-top: 50px;
+  margin-right: 130px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #009688;
+}
+
+.back-to-button:hover {
+  color: #005f5f;
+}
+
+.icon-container {
+  position: absolute;
+  top: 0px; 
+  right: 5px; 
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+   
+}
+
+.click-count {
+  position: absolute;
+  top: 25px;   
+  right: 74px;  
+  cursor: pointer;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  /* background: rgb(240, 240, 240, 0.1); */
+  z-index: 10; 
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pull-container{
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  top: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+
+  #cord{
+    width: 4px;
+    height: 30%;
+    background: linear-gradient(180deg, rgba(13,13,13,1) 4%, rgb(111, 115, 118) 86%);
+  }
+
+  #bob{
+    width: 50%;
+    height: 50px;
+    background-color: rgb(181, 183, 185);
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  h4{
+    font-size: 1rem;
+    white-space: nowrap;
+    font-weight: normal;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+@media (max-width: 1920px){
+  .item-caption{
+    h3{
+      font-size: 1.2rem;
+    }
+    p{
+      font-size: 0.7rem;
+      width: 60%;
+      margin-top: 10px;
+    }
+  }
+}
+
+@media screen and (max-width:1350px){
+  .page>:nth-child(2){
+    grid-column: span 1;
+  }
+}

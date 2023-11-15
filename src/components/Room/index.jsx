@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
 import { AuthProvider } from '../../contexts';
 import { BlobToImage } from "../../components"
+import "./style.scss"
 
 const Room = ( {mapSet, initialMapIndex = 0, user_id, room_name, roomType} ) => {
   const [currentMapIndex, setCurrentMapIndex] = useState(initialMapIndex);
@@ -76,9 +77,7 @@ const nextMap = () => {
     <div className="environment-map-grid">
       {}
       {/* <BlobToImage image_id={initialMapIndex} refs={pageRefs} loadedFunc={setLoadedVar} room_name={room_name} roomType={roomType}/> */}
-      <button className='left-arrow' onClick={prevMap}>←</button>  
-        <EnvironmentMap roomId={initialMapIndex} mapUrls={mapset ? imageURLs : loading} />
-      <button className='right-arrow' onClick={nextMap}>→</button> 
+      <EnvironmentMap roomId={initialMapIndex} mapUrls={mapset ? imageURLs : loading} />
     </div>
   );
 };

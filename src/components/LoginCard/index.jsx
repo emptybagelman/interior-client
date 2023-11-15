@@ -1,10 +1,10 @@
 import React,{ useState } from 'react'
-import "./style.css"
+import "./style.scss"
 import { useAuth } from "../../contexts"
 import { useNavigate } from 'react-router-dom'
 import { QuestionHelp } from '../../components'
 
-const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
+const LoginCard = ({ toggleSwitch,focusStyle,changeState }) => {
     const baseUrl = 'https://inspiremyserver.onrender.com/'
     const [username, setUsername] = useState("")
     const [password,setPassword] = useState("")
@@ -87,7 +87,7 @@ const LoginCard = ({ cardHeight,toggleSwitch,focusStyle }) => {
     }
 
   return (
-    <div id="login"  className="card" style={Object.assign({"height":cardHeight},!toggleSwitch ? focusStyle : {"color":"var(--outline)"})} >
+    <div id="login"  className="card" style={Object.assign(!toggleSwitch ? focusStyle : {"color":"var(--outline)"})} >
         <div className="lamp">
             <img src="https://res.cloudinary.com/de2nposrf/image/upload/v1697042277/static/lamp.png" alt="lamp" id='left-lamp' style={!toggleSwitch ? lampShade : {}}/>
             <div id="llight" style={!toggleSwitch ? showLight : {}}></div>

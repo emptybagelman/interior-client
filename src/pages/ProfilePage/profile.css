@@ -9,6 +9,8 @@
     text-align: center;
     max-width: 100vw;
     position: relative;
+    overflow: hidden;
+
 }
 
 #profile-container>div {

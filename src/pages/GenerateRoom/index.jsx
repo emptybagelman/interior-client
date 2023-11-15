@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { loadImage } from "canvas"
-import "./style.css"
+import "./style.scss"
 import { useAuth } from '../../contexts'
 import axiosInstance from "../../helpers"
 import { useNavigate } from 'react-router-dom'
@@ -650,7 +650,7 @@ const GenerateRoom = () => {
                 </div>
 
                 <div className="inputs" id='dimensions-input'>
-                    <label htmlFor="dimensions">Room Dimensions</label>
+                    <label htmlFor="dimensions">Dimensions</label>
                     <input ref={dimRef} placeholder="> 12m x 12m" type="text" name='dimensions' id='dimensions-field' onChange={handleDimensions} required/>
                 </div>
 
