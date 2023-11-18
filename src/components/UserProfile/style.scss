@@ -2,7 +2,7 @@
 #right-rooms-container{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
     margin: 50px;
 }
 
@@ -92,5 +92,10 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    #user-rooms-container,
+    #likes-container{
+        grid-template-columns: repeat(2,1fr);
+        width: 100%;
     }
 }

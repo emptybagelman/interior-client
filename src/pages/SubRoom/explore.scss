@@ -184,11 +184,9 @@ body{
 
 .page{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 30px;
-  margin-left: 120px;
-  margin-right: 120px;
-  margin-top: 40px;
+  margin: 40px;
   row-gap: 25px;
   grid-auto-rows: 400px;
 }
@@ -305,7 +303,7 @@ body{
   font-family: 'Space Grotesk', sans-serif;
   position: absolute;
   top: 20px;
-  right: 50px;
+  right: 20px;
   padding: 10px 20px;
   font-size: 30px;
   cursor: pointer;
@@ -324,7 +322,12 @@ body{
   filter: invert(1);
 }
 
-
+@media screen and (max-width:850px){
+  .close-button{
+    left: 20px;
+    right: auto;
+  }
+}
 
 
 .page.dimmed .item, 
@@ -349,20 +352,20 @@ body{
 
 .title-section {
 display: flex;
-justify-content: space-between;
+justify-content: space-evenly;
 align-items: center;
 }
 
 .room-title {
   color:white;
   margin-top: 50px;
-  margin-left: 125px;
+  // margin-left: 125px;
   margin-bottom: 10px
 }
 
 .back-to-button {
   margin-top: 50px;
-  margin-right: 130px;
+  // margin-right: 130px;
   border-radius: 4px;
   cursor: pointer;
   color: #009688;
@@ -394,37 +397,6 @@ align-items: center;
   /* background: rgb(240, 240, 240, 0.1); */
   z-index: 10; 
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.pull-container{
-  position: absolute;
-  width: 50px;
-  height: 100%;
-  top: 75px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-
-  #cord{
-    width: 4px;
-    height: 30%;
-    background: linear-gradient(180deg, rgba(13,13,13,1) 4%, rgb(111, 115, 118) 86%);
-  }
-
-  #bob{
-    width: 50%;
-    height: 50px;
-    background-color: rgb(181, 183, 185);
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-
-  h4{
-    font-size: 1rem;
-    white-space: nowrap;
-    font-weight: normal;
-  }
 }
 
 @media screen and (max-width: 767px) {
@@ -467,8 +439,31 @@ align-items: center;
       margin: 50px 50px 0px 50px;
     }
     a{
-      margin: 20px 50px 0px 50px;
+      margin: 25px 0px 0px 40px ;
+      align-self: flex-start;
     }
 
+  }
+}
+
+@media screen and (max-width:600px){
+  .title-section{
+    h1{
+      font-size: 1.4rem;
+      white-space: initial;
+      padding: 0;
+      margin: 40px 0px;
+    }
+    a{
+      align-self: flex-start;
+      margin: 25px 0px 0px 40px ;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@media screen and (max-width:350px){
+  .page{
+    margin: 40px 5px;
   }
 }

@@ -19,8 +19,9 @@ const EnvironmentMap = ({ mapUrls, roomId }) => {
 
   const containerRef = useRef(null);
   const [isClick, setClick] = useState(false);
-   const [showComments, setShowComments] = useState(false); 
-   const handleCommentsToggle = () => {
+  const [showComments, setShowComments] = useState(false); 
+
+  const handleCommentsToggle = () => {
     setShowComments(prevShowComments => !prevShowComments);
   };
 
@@ -141,7 +142,7 @@ scene.backgroundIntensity = 1
       
       <div className='like-bar'>
         <p className='favourites'>Add to favourites</p>
-        <Heart isClick={isClick} onClick={handleLike} />
+        { user ? <Heart isClick={isClick} onClick={handleLike} /> : ""}
         <button className='comments-button' onClick={handleCommentsToggle}>Comments <AiOutlineComment /></button>
       <EmailButton /></div>
       {showComments && <Comments commentsUrl="http://localhost:3004/comments"

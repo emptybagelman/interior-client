@@ -1,14 +1,14 @@
 import React, {useState, useEffect } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "./style.scss";
 import { useAuth } from "../../contexts";
 import axios from "axios";
 
 const NavBar = () => {
 
-  const { user, setUser } = useAuth();
+  const { user, setUser,width } = useAuth();
 
-  const [width,setWidth] = useState(window.innerWidth)
+  const navigate = useNavigate()
 
   const [menuActive, setMenuActive] = useState(false)
 
@@ -30,21 +30,13 @@ const NavBar = () => {
     setUser("");
   }
 
-  function handleResize(){
-    setWidth(window.innerWidth)
-  }
-
   function handleMenuClick(){
-    setMenuActive(!menuActive)
+    if(width <= 850){
+      setMenuActive(!menuActive)
+    }else{
+      navigate("/")
+    }
   }
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <div className={width <= 850 ? "parent" : ""}>

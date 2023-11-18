@@ -21,7 +21,7 @@ export const useAuth = () => useContext(AuthContext)
 const RoomContext = createContext()
 
 export const RoomProvider = ({ children }) => {
-  const [room, setRoom] = useState()
+  const [room, setRoom] = useState("Bedroom")
 
   return (
     <RoomContext.Provider value={{room, setRoom}}>

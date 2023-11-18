@@ -23,6 +23,7 @@
 }
 
 .nav-row a{
+    white-space: nowrap;
     font-size: 0.8rem;
     text-decoration: none;
     margin-right: 40px;
@@ -48,6 +49,7 @@
     max-height: 300px;
     filter: invert(1);
     margin-left: 20px;
+    cursor: pointer;
 }
 
 .parent{
@@ -109,4 +111,25 @@
         }
     }
 
+}
+
+@media screen and (max-width:1220px){
+    .nav-row{
+        a{
+            font-size: 0.6rem;
+            margin-right: 20px;
+            padding: 6px 30px;
+
+        }
+    }
+}
+
+@media screen and (max-width:950px){
+    .nav-row{
+        a{
+            font-size: 0.5rem;
+            margin-right: 20px;
+            padding: 5px 24px;
+        }
+    }
 }

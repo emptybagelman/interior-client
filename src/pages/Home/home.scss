@@ -136,3 +136,17 @@
     filter: brightness(0.5);
   }
 }
+
+@media screen and (max-width:400px){
+  #home-container{
+    h1{
+      font-size: 2.4rem;
+    }
+    h2{
+      font-size: 1rem;
+    }
+    p{
+      font-size: medium;
+    }
+  }
+}
