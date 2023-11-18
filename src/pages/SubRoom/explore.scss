@@ -263,7 +263,7 @@ body{
 
 .fullscreen-div {
     margin-top: 0;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;  
@@ -450,5 +450,25 @@ align-items: center;
 @media screen and (max-width:1350px){
   .page>:nth-child(2){
     grid-column: span 1;
+  }
+  .title-section{
+    h1{
+      font-size: 2.4rem;
+    }
+  }
+}
+
+@media screen and (max-width:850px){
+  .title-section{
+    flex-direction: column-reverse;
+    align-items: center;
+    h1{
+      white-space: nowrap;
+      margin: 50px 50px 0px 50px;
+    }
+    a{
+      margin: 20px 50px 0px 50px;
+    }
+
   }
 }

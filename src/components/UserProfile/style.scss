@@ -3,13 +3,14 @@
     display: flex;
     flex-direction: column;
     width: 50%;
+    margin: 50px;
 }
 
 #user-rooms-container,
 #likes-container{
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 0.8fr);
+    grid-template-columns: repeat(2, 0.8fr);
     justify-content: center;
     z-index: 1;
 }
@@ -20,7 +21,7 @@
 }
 
 #profile-imgs-text{
-    font-size: 1rem;
+    font-size: 80%;
     background-color: var(--beige);
     color: var(--bg);
     height: 70px;
@@ -86,3 +87,10 @@
     display: flex;
 }
 
+@media screen and (max-width:850px){
+    .both-cont{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

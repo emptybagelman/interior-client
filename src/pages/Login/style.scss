@@ -1,6 +1,6 @@
 #login-page{
     height: 100vh;
-    width: 100vw;
+    min-width: 100%;
     padding: 0;
     margin: 0;
     color: #FAF8F2 ;
@@ -14,7 +14,7 @@
 
 .card{
     width: 50%;
-    height: 55%;
+    // height: 55%;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -27,14 +27,22 @@
     perspective: 500px;
 }
 
-@media (max-width:1920px){
+.show{
+    display: flex;
+}
+
+.hide{
+    display: none;
+}
+
+@media (min-width:1281px){
     .card{
-        height: 70%;
+        height: 60%;
         margin-top: 5%;
     }
 }
 
-@media (max-width: 1366px){
+@media (max-width: 1280px){
     .card{
         height: 60%;
         margin-top: 5%;
@@ -42,17 +50,14 @@
 }
 
 @media screen and (max-width:850px){
+
     #login-page{
-        justify-content: center;
-        align-items: center;
+        position: absolute;
+        top: 0;
     }
 
     .card{
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 80%;
-        height: 80%;
+        width: 70%;
         padding: 0;
         margin: 0;
     }

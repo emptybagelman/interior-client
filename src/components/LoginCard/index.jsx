@@ -2,14 +2,13 @@ import React,{ useState } from 'react'
 import "./style.scss"
 import { useAuth } from "../../contexts"
 import { useNavigate } from 'react-router-dom'
-import { QuestionHelp } from '../../components'
+import { QuestionHelp, Slider } from '../../components'
 
 const LoginCard = ({ toggleSwitch,focusStyle,changeState }) => {
     const baseUrl = 'https://inspiremyserver.onrender.com/'
     const [username, setUsername] = useState("")
     const [password,setPassword] = useState("")
-    const { setUser } = useAuth()
-    const { setUsersUsername }  = useAuth()
+    const { setUser, setUsersUsername, width } = useAuth()
 
     const navigate = useNavigate()
 
@@ -87,7 +86,14 @@ const LoginCard = ({ toggleSwitch,focusStyle,changeState }) => {
     }
 
   return (
-    <div id="login"  className="card" style={Object.assign(!toggleSwitch ? focusStyle : {"color":"var(--outline)"})} >
+    <div id="login"  className={width <= 850 && !toggleSwitch ? "card show" : width <= 850 && toggleSwitch ? "card hide" : "card" } style={Object.assign(!toggleSwitch ? focusStyle : {"color":"var(--outline)"})} >
+
+        {
+            width <= 850 
+            ? <Slider changeState={changeState} left={true}/>
+            : ""
+        }
+
         <div className="lamp">
             <img src="https://res.cloudinary.com/de2nposrf/image/upload/v1697042277/static/lamp.png" alt="lamp" id='left-lamp' style={!toggleSwitch ? lampShade : {}}/>
             <div id="llight" style={!toggleSwitch ? showLight : {}}></div>

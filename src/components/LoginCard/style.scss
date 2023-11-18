@@ -1,10 +1,12 @@
 #login{
     position: relative;
-    
+    z-index: 99;
+    justify-content: space-around;
+    min-height: 60%;
 }
 
 #login h2{
-    font-size: 2.4rem;
+    font-size: 2rem;
     color: #14080E;
     text-align: center;
     padding-top: 100px;
@@ -19,7 +21,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
+    // position: absolute;
     top: 40%
 }
 
@@ -46,6 +48,7 @@
     font-size: 0.8rem;
     border: 2px solid var(--outline);
     padding: 10px 25px;
+    margin: 20%;
     outline: none;
     border-radius: 25px;
     cursor: pointer;
@@ -53,6 +56,7 @@
     color: #14080E;
     font-family: inherit;
     background-color: #FAF8F2;
+    white-space: nowrap;
 }
 
 #login button:hover{
@@ -85,7 +89,7 @@
     background: radial-gradient(ellipse at 50% 100px, rgba(255, 255, 235,0.95) 20%, rgba(80,92,103,0) 60%);
 }
 
-@media (max-width: 1920px){
+@media (min-width: 1281px){
     #login{
         h2{
             font-size: 2rem;
@@ -94,7 +98,8 @@
 
         .lamp{
             scale: 30%;
-            top: -65%;
+            top: -380px;
+
         }
 
         label{
@@ -102,7 +107,7 @@
         }
 
         input{
-            height: 1.6rem;
+            height: 1.4rem;
         }
 
         button {
@@ -112,7 +117,7 @@
     }
 }
 
-@media (max-width: 1366px){
+@media (max-width: 1280px){
     #login{
         h2{
             font-size: 1.4rem;
@@ -143,7 +148,18 @@
 @media screen and (max-width:850px){
     #login{
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+
+        button{
+            font-size: 1rem;
+            border-radius: 50px;
+            margin-top: 20px;
+        }
+
+        .lamp{
+            top: -400px;
+        }
     }
 }

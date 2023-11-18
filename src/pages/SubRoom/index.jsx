@@ -101,39 +101,12 @@ const SubRoom = () => {
   useEffect(() => {
     callRoomImages()
   },[])
-  
-  
-    // useEffect(() => {
-    //     const handleScroll = (e) => {
-    //     const fullscreenDiv = document.querySelector('.fullscreen-div');
-    //     if (fullscreenDiv) {
-    //         fullscreenDiv.scrollTop += e.deltaY;
-    //         e.preventDefault();
-    //     }
-    //     };
     
-    //     if (selectedImage) {
-    //     window.addEventListener('wheel', handleScroll);
-    //     } else {
-    //     window.removeEventListener('wheel', handleScroll);
-    //     }
-    
-    //     // for(let img of pageRefs.current){
-    //     //   console.log(img.current.src);
-    //     // }
-    
-    //     return () => {
-    //     window.removeEventListener('wheel', handleScroll);
-    //     };
-    // }, [selectedImage]);
-  
-  
-  
     return (
         <div className='overflow-hiding'>
             <div className='title-section'>
-            <h1 className='room-title'>{room} Inspiration</h1>
-            <BackButton backTo="/explore" label="Back to Explore" />
+              <h1 className='room-title'>{room} Inspiration</h1>
+              <BackButton backTo="/explore" label="Back to Explore" />
             </div>
         
         <div className={`page${selectedImage ? ' dimmed' : ''}`}>

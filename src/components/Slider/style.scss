@@ -1,0 +1,37 @@
+.slider-wrapper{
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    top: 2%;
+    left: 2%;
+    background-color: var(--bg);
+    border-radius: 25px;
+    outline: solid 2px var(--bg);
+
+    div{
+        width: 50%;
+        height: 100%;
+        border-radius: 50%;
+        position: absolute;
+        background-color: var(--beige);
+        right: 0;
+    }
+}
+
+.left-to-right{
+    animation: leftTo 0.5s forwards;
+}
+
+.right-to-left {
+    animation: rightTo 0.5s forwards;
+}
+
+@keyframes leftTo {
+    0%{left: 0;}
+    100%{left:50%;}
+}
+
+@keyframes rightTo {
+    0%{right: 0;}
+    100%{right:50%;}
+}

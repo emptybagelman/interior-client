@@ -1,7 +1,7 @@
 import React , { useRef, useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import axiosInstance from '../../helpers';
-import "./style.css"
+import "./style.scss"
 import { EditOverlay, DeleteOverlay } from "../../components"
 import axios from 'axios';
 

@@ -2,13 +2,12 @@ import React,{ useState, useEffect, useRef } from 'react'
 import { LoginCard, LightSwitch, SignupCard } from "../../components"
 import "./style.scss"
 import sound from "../../assets/audio/lightswitch.wav"
-import { BlobToImage } from "../../components"
+import { useAuth } from '../../contexts'
 
 const Login = () => {
 
-  // const [cardHeight, setCardHeight] = useState(window.innerHeight *.6)
-
-  const [toggleSwitch, setToggleSwitch] = useState(false)
+  const [toggleSwitch, setToggleSwitch] = useState(true)
+  const { width } = useAuth()
 
   const focusStyle = {
     "background": "#EDE4D9",
@@ -32,21 +31,13 @@ const Login = () => {
     }
   }
 
-  // useEffect(() => {
-  //   function handleResize(){
-  //     setCardHeight(window.innerHeight *.6)
-  //   }
-
-  //   window.addEventListener("resize",handleResize)
-  //   return () => window.removeEventListener("resize",handleResize)
-  // },[])
-
   return (
     <div id='login-page' onKeyDown={keyboardSwitch} tabIndex={0} aria-label='Press space to switch between login and register'>
+
 {/*  cardHeight={cardHeight} */}
         <LoginCard changeState={changeState} toggleSwitch={toggleSwitch} focusStyle={focusStyle} />
 
-        <LightSwitch changeState={changeState} toggleSwitch={toggleSwitch}/>
+        { width > 850 ? <LightSwitch changeState={changeState} toggleSwitch={toggleSwitch}/> : "" }
 
 {/*  cardHeight={cardHeight} */}
         <SignupCard changeState={changeState} toggleSwitch={toggleSwitch} focusStyle={focusStyle} setToggleSwitch={setToggleSwitch}/>

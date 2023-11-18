@@ -28,8 +28,7 @@
     position: absolute;
     width: 110px;
     height: 140px;
-    background: rgb(25,23,30);
-    background: #EDE4D9;
+    background: linear-gradient(180deg, rgb(69, 67, 71) 0%, rgb(28, 27, 30) 95%);
     left: -5px;
     bottom: -263px;
     transform: rotateX(-65deg);
@@ -42,15 +41,14 @@
     width: 100px;
     height: 260px;
     /* background-color: rgb(170, 171, 172); */
-    background: rgb(25,23,30);
-    background: linear-gradient(0deg, rgb(69, 67, 71) 0%, rgba(170,171,172,1) 81%);
+    background: linear-gradient(0deg, rgb(69, 67, 71) 0%, rgba(170,171,172,1) 21%);
     transform: rotateX(55deg);
 }
 
 #login-label,
 #register-label{
     position: absolute;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: normal;
 }
 
@@ -61,7 +59,7 @@
 }
 
 #register-label{
-    bottom: -120px;
+    bottom: -100px;
 }
 
 .spacebar-graphic{
@@ -70,15 +68,15 @@
 }
 
 .spacebar{
-    width: 350px;
-    height: 50px;
+    width: 320px;
+    height: 40px;
     margin: 5px;
-    background: #EDE4D9;
+    background: var(--beige);
     border-radius: 5px;
-    box-shadow: inset 1px -3px 2px 5px #b9b5b0;
+    box-shadow: inset 0px -2px 2px 5px rgb(198, 196, 194);
 }
 
-@media (max-width: 1366px){
+// @media (max-width: 1366px){
     .switch-container{
         height: 220px;
     }
@@ -97,17 +95,9 @@
         left: 5px;
     }
 
-    .spacebar{
-        width: 220px;
-        height: 35px;
-    }
-    #login-label,
-    #register-label{
-        font-size: 0.8rem;
-    }
-}
+// }
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1260px){
     .switch-container{
         display: none;
     }

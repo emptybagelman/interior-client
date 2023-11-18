@@ -1,6 +1,7 @@
 import React,{ useRef, useState } from 'react'
 import "./style.scss"
-import { QuestionHelp } from "../../components" 
+import { QuestionHelp, Slider } from "../../components" 
+import { useAuth } from '../../contexts'
 
 const SignupCard = ({ toggleSwitch, focusStyle, setToggleSwitch,changeState }) => {
     const baseUrl='https://inspiremyserver.onrender.com/'
@@ -8,6 +9,8 @@ const SignupCard = ({ toggleSwitch, focusStyle, setToggleSwitch,changeState }) =
     const [email, setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [confPassword,setConfPassword] = useState("")
+
+    const { width } = useAuth()
 
     const passwordRef = useRef()
     const confPasswordRef = useRef()
@@ -102,7 +105,13 @@ const SignupCard = ({ toggleSwitch, focusStyle, setToggleSwitch,changeState }) =
     }
 
   return (
-    <div id='signup' className="card" style={Object.assign(toggleSwitch ? focusStyle : {"color":"var(--outlinefocus)"})}>
+    <div id='signup' className={width <= 850 && toggleSwitch ? "card show" : width <= 850 && !toggleSwitch ? "card hide" : "card" } style={Object.assign(toggleSwitch ? focusStyle : {"color":"var(--outlinefocus)"})}>
+        {
+            width <= 850 
+            ? <Slider changeState={changeState} />
+            : ""
+        }
+       
         <div className="lamp">
             <img src="https://res.cloudinary.com/de2nposrf/image/upload/v1697042277/static/lamp.png" alt="lamp" id='right-lamp' style={toggleSwitch ? lampShade : {}}/>
             <div id="rlight" style={toggleSwitch ? showLight : {}}></div>

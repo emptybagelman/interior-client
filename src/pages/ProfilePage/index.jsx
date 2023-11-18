@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts';
 import { useNavigate } from 'react-router-dom'
 import { UserProfile } from '../../components';
 import axios from "axios";
-import './profile.css'
+import './profile.scss'
 
 const Profile = () => {
   const baseUrl = 'https://inspiremyserver.onrender.com/'

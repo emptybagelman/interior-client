@@ -1,23 +1,25 @@
 import React,{ useState, useEffect } from 'react'
 import sound from "../../assets/audio/lightswitch.wav"
 import "./style.scss"
+import { useAuth } from '../../contexts'
 
 const LightSwitch = ({ changeState, toggleSwitch }) => {
 
     const [ usePull, setUsePull ] = useState(false)
     const [style,setStyle] = useState({"transform":"translateY(0px)"})
+    const { width } = useAuth()
 
     const shadedStyle = {
-        "background": "linear-gradient(90deg, rgba(250,248,242,1) 0%, rgba(73,71,91,1) 95%)",
-        "width": "81px",
+        "background": "linear-gradient(0deg, rgba(250,248,242,1) 0%, rgba(73,71,91,1) 95%)",
+        "width": "80px",
         "height": "138px",
         "left": "8px",
-        "top": "-37px",
+        "top": "-38px",
         "transform": "rotateX(85deg)"
     }
 
     const mainStyle = {
-        "background": "linear-gradient(180deg, rgba(250,248,242,1) 0%, rgba(73,71,91,1) 97%)",
+        "background": "linear-gradient(180deg, rgba(250,248,242,1) 0%, rgba(69,67,71,1) 97%)",
         "top": "12px",
         "left":"8px",
         "width": "80px",
@@ -39,18 +41,15 @@ const LightSwitch = ({ changeState, toggleSwitch }) => {
 
 
     useEffect(() => {
-        const handleResize = () => {
-          if(window.innerWidth < 1024){
-            setUsePull(true)
-          }else{
-            setUsePull(false)
-          }
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {
-          window.removeEventListener('resize', handleResize);
-        };
-      }, []);
+      function handleCord(){
+        if(width <= 1280){
+          setUsePull(true)
+        }else{
+          setUsePull(false)
+        }
+      }
+      handleCord()
+    }, [width]);
 
 
   return (

@@ -1,5 +1,5 @@
 import React,{ useState, useRef } from 'react'
-import "./style.css"
+import "./style.scss"
 
 const QuestionHelp = ({active, title, content, summaryContent="", image="", orientation="right"}) => {
 
@@ -20,7 +20,7 @@ const QuestionHelp = ({active, title, content, summaryContent="", image="", orie
     <div id="questions" data-testid="questions">
         <p id='qmark' onClick={toggleDrop} data-testid="qmark">?</p>
             <div data-testid="qBox" ref={questionRef} id="qbox" style={Object.assign(orientation === "right" ? {"left":"200%"} : {"right":"150%"},
-    !active ? {"display":"none"} : {})
+            !active ? {"display":"none"} : {})
     }>
                  <h3>{title}</h3>
                 {content}{

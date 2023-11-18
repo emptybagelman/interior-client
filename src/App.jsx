@@ -20,7 +20,7 @@ const Category = lazy(() => import("./pages/SubRoom"))
 
 export default function App() {
 
-  const { user } = useAuth()
+  const { user, setWidth } = useAuth()
 
   const handleRefresh = async () => {
     try {
@@ -35,6 +35,15 @@ export default function App() {
       handleRefresh()
     }
   },[user])
+
+  useEffect(() => {
+    function handleResize(){
+      setWidth(window.innerWidth)
+    }
+
+    window.addEventListener("resize",handleResize)
+    return () => window.removeEventListener("resize",handleResize)
+  },[])
 
   return (
       <Suspense fallback={<h1>Loading</h1>}>
