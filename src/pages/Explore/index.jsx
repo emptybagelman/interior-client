@@ -4,7 +4,7 @@ import React from 'react'
 
 const Explore = () => {
   return (
-    <div className='explore' style={{"overflow":"hidden"}}>
+    <div className='explore' >
     <ExploreItems />  
   </div>
   )

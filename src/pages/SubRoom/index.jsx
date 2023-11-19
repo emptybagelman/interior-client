@@ -20,7 +20,7 @@ const SubRoom = () => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   
     const handleImageClick = (image, index) => {
-      document.body.style.overflow = 'hidden';
+      // document.body.style.overflow = 'hidden';
       const updatedImages = [...imagesWithStyles];
       //updatedImages[index].clickCount += 1;
       setImagesWithStyles(updatedImages);
