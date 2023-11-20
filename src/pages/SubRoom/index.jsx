@@ -110,47 +110,47 @@ const SubRoom = () => {
             </div>
         
         <div className={`page${selectedImage ? ' dimmed' : ''}`}>
-            {roomArray.map((image, index) => (
-        <div className="item-container" 
-            key={index} 
-            onClick={() => handleImageClick(image, index)}
-            onMouseEnter={() => setHoveredImageIndex(image.id)}
-            onMouseLeave={() => setHoveredImageIndex(null)}
-        >
-        <img className='item' src={image.src} alt={image.alt} />
-        <div className="item-caption">
-        <h3>{image.name.split("_").join(" ")}</h3>
-        <p>Dimensions: {image.dimensions}</p>
-        <p>Description: {image.description}</p>
-        <p>Theme: {image.theme}</p>
-        {hoveredImageIndex == image.id && (
-            <div className="icon-container">
-        
-            <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(image.id); }}>
-                <Heart isClick={likedImages[image.id]} />
-            </div>
+              {roomArray.map((image, index) => (
+          <div className="item-container" 
+              key={index} 
+              onClick={() => handleImageClick(image, index)}
+              onMouseEnter={() => setHoveredImageIndex(image.id)}
+              onMouseLeave={() => setHoveredImageIndex(null)}
+          >
+          <img className='item' src={image.src} alt={image.alt} />
+          <div className="item-caption">
+            <h3>{image.name.split("_").join(" ")}</h3>
+            <p>Dimensions: {image.dimensions}</p>
+            <p>Description: {image.description}</p>
+            <p>Theme: {image.theme}</p>
+            {hoveredImageIndex == image.id && (
+                <div className="icon-container">
             
-            <div className="click-count">
-                <AiFillEye />
-                <span> {image.clickCount}</span>
-            </div>
-            </div>
-        )}</div>
-        
-        
-        </div>
-    ))}
-  
-  
-        {selectedImage && (
-          <div className="fullscreen-div">
-          <div className="fullscreen-content">
-            <Room mapSet={room.toLowerCase()} initialMapIndex={selectedImageIndex} roomType={room} room_name={selectedImage.name} user_id={selectedImage.user_id}/>
-            <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
+                <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(image.id); }}>
+                    <Heart isClick={likedImages[image.id]} />
+                </div>
+                
+                <div className="click-count">
+                    <AiFillEye />
+                    <span> {image.clickCount}</span>
+                </div>
+              </div>
+          )}</div>
+          
+          
           </div>
-      </div>
-        )}
-      </div>
+      ))}
+    
+    
+          {selectedImage && (
+            <div className="fullscreen-div">
+              <div className="fullscreen-content">
+                <Room mapSet={room.toLowerCase()} initialMapIndex={selectedImageIndex} roomType={room} room_name={selectedImage.name} user_id={selectedImage.user_id}/>
+                <button className="close-button" onClick={handleCloseClick}><GrClose /></button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     );
 }

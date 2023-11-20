@@ -131,7 +131,7 @@ const SignupCard = ({ toggleSwitch, focusStyle, setToggleSwitch,changeState }) =
             <input data-testid={"user-input"} type="text" className={"signup-input"} name="username" id="reg-user-input" value={username} placeholder='>' onChange={handleUserInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
             <label htmlFor="email">Email</label>
-            <input data-testid={"email-input"} type="text" className={"signup-input"} name="email" id="email-input" value={email} placeholder='>' onChange={handleEmailInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
+            <input data-testid={"email-input"} type="email" className={"signup-input"} name="email" id="email-input" value={email} placeholder='>' onChange={handleEmailInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>
 
             <label htmlFor="password">Password</label>
             <input data-testid={"password-input"} ref={passwordRef} className={"signup-input"} type="password" name="password" id="reg-password-input" value={password} placeholder='>' onChange={handlePassInput} autoComplete='off' disabled={!toggleSwitch}  style={!toggleSwitch ? activeStyle : {}} required/>

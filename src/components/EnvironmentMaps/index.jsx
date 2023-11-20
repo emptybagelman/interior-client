@@ -7,12 +7,12 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import Heart from "react-animated-heart";
 import axiosInstance from '../../helpers'
 import { Canvas } from '@react-three/fiber';
-import Comments from "../nestedComments/Comments";
 import { AiOutlineComment } from 'react-icons/ai'
 
 import { useAuth } from '../../contexts/index.jsx';
 import Room from '../Room';
 import EmailButton from '../Email';
+import Comments from '../Comments';
 
 
 const EnvironmentMap = ({ mapUrls, roomId }) => {
@@ -25,7 +25,7 @@ const EnvironmentMap = ({ mapUrls, roomId }) => {
     setShowComments(prevShowComments => !prevShowComments);
   };
 
-  const { user } = useAuth();
+  const { user, width } = useAuth();
 
   const handleLike = async () => {
     
@@ -139,15 +139,26 @@ scene.backgroundIntensity = 1
     
     <>
       <div ref={containerRef} className="environment-map" />
-      
-      <div className='like-bar'>
-        <p className='favourites'>Add to favourites</p>
-        { user ? <Heart isClick={isClick} onClick={handleLike} /> : ""}
-        <button className='comments-button' onClick={handleCommentsToggle}>Comments <AiOutlineComment /></button>
-      <EmailButton /></div>
-      {showComments && <Comments commentsUrl="http://localhost:3004/comments"
-        currentUserId="1" />} 
-    
+      {/* style={ showComments ? {"top":"50vh","margin":"0"} : {} } */}
+      <div className={showComments ? "like-bar open" : 'like-bar close'} >
+        <div className="top">
+          {
+            user 
+            ? 
+            <div className='like-header'>
+              {width > 350 ? <p className='favourites'>Add to favourites</p> : ""}
+              <Heart isClick={isClick} onClick={handleLike} />
+            </div>
+            : ""
+          }
+          <button className='comments-button' onClick={handleCommentsToggle}>
+            {width > 700 ? "Comments" : ""} <AiOutlineComment />
+          </button>
+        </div>
+        <div className="bottom">
+          <Comments room_id={roomId}/>
+        </div>
+      </div>
     </>
   );
 };

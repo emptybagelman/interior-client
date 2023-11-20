@@ -67,7 +67,6 @@ const nextMap = () => {
         })
         setMapSet(sortedArray)
       }
-      console.log(arr);
     } catch (error) {
       console.log("Damn it",error);
     }
@@ -75,7 +74,6 @@ const nextMap = () => {
 
   return (
     <div className="environment-map-grid">
-      {}
       {/* <BlobToImage image_id={initialMapIndex} refs={pageRefs} loadedFunc={setLoadedVar} room_name={room_name} roomType={roomType}/> */}
       <EnvironmentMap roomId={initialMapIndex} mapUrls={mapset ? imageURLs : loading} />
     </div>
