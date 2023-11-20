@@ -1,6 +1,6 @@
 .comment-section{
     width: 100vw;
-    height: 100vh;
+    min-height: 40vh;
     background-color: var(--bg);
     display: flex;
     flex-direction: column;
@@ -132,9 +132,40 @@
                 }
             }
         }
-
-        
     }
 
+    @media (max-width: 500px){
+        #add-comment-btn{
+            font-size: 0.6rem;
+            white-space: nowrap;
+        }
+        .comment .post{
+            .info{
+                margin-right: 10px;
+                width: 60px;
+                h2{
+                    font-size: 0.8rem;
+                }
+                h3{
+                    font-size: 0.5rem;
+                }
+            }
+            .message {
+                p{
+                    font-size: 0.6rem;
+                }
+                .edit-functions{
+                    p{
+                        font-size: 0.5rem;
+                    }
+                }
 
+
+            }
+        }
+        h1{
+            font-size: 1.2rem;
+        }
+    }
 }
+

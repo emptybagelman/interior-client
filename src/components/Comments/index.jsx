@@ -60,6 +60,8 @@ const Comments = ({ room_id }) => {
             }).then(resp => {
                 console.log("successful post", resp.data.data);
                 clearInput()
+                setAddToggle(!addToggle)
+                setRefresh(prev => prev + 1)
             })
 
 
