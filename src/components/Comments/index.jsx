@@ -9,13 +9,19 @@ const Comments = ({ room_id }) => {
     const [ commentData, setCommentData ] = useState(null)
     const [ newComment, setNewComment ] = useState(null)
 
+    const [addToggle, setAddToggle] = useState(false)
+
+    const [refresh, setRefresh] = useState(0)
+
+    const commentRefs = useRef([])
+
+
+
     async function fetchComments() {
-        console.log(room_id);
         try {
             const resp = await axiosInstance.get(`/comments/room/${room_id}`)
 
             const data = await resp.data.data
-            console.log(data);
             setCommentData(data)
 
         } catch (error) {
@@ -25,6 +31,10 @@ const Comments = ({ room_id }) => {
 
     function handleInput(e){
         setNewComment(e.target.value)
+    }
+
+    function clearInput(){
+        setNewComment("")
     }
 
     async function handleCommentSubmit(e){
@@ -49,6 +59,7 @@ const Comments = ({ room_id }) => {
                 }
             }).then(resp => {
                 console.log("successful post", resp.data.data);
+                clearInput()
             })
 
 
@@ -58,39 +69,55 @@ const Comments = ({ room_id }) => {
 
     }
 
+    async function handleDelete(user_id,index){
+        console.log(index);
+
+        const deleteComment = await axiosInstance.delete(`/comments/users/${user_id}/${index}`).then(resp => {
+            console.log(index, "deleted succesfully");
+            setRefresh(prev => prev + 1)
+        })
+    }
+
     useEffect(() => {
         fetchComments()
-    },[])
+    },[refresh])
+
 
   return (
     <div className='comment-section'>
         {/* {room_id} */}
-        <h1>Comments</h1>
+        
+        {
+            user && !addToggle? <p id='add-comment-btn' onClick={() => setAddToggle(!addToggle)}>{ !addToggle ? "Add Comment" : "Cancel" }</p> : ""
+        }
 
         {
-            user
+            user && addToggle
             ?
             <div className="add-comment">
                 <form onSubmit={handleCommentSubmit}>
-                    <label htmlFor="content">Add a comment:</label>
-                    <input type="text" onChange={handleInput}/>
-                    <button type="submit">Submit</button>
+                    <label htmlFor="content">{usersUsername}</label>
+                    <textarea value={newComment} onChange={handleInput} cols={40} placeholder='Add a comment...'/>
+                    
+                    <div className="button-div">
+                        <button type='reset' onClick={() => setAddToggle(!addToggle)}>Cancel</button>
+                        <button type="submit">Submit</button>
+                    </div>
                 </form>
             </div>
             :
             ""
         }
 
-
-        {/* remember to wrap this in a map function for comments */}
+        <h1>Comments</h1>
 
         { commentData && commentData.map((comment,index) => (
-            <div className="comment">
+            <div className="comment" key={index} ref={commentRefs[index]}>
                 <div className="post">
                     <div className="info">
                         <h2>{comment.username}</h2>
                         <h3>{
-                            new Date(comment.date).toLocaleDateString('en-US', { day: 'numeric', month: 'numeric', year: 'numeric' })
+                            new Date(comment.date).toLocaleDateString('en-UK', { day: 'numeric', month: 'numeric', year: 'numeric' })
                             }
                         </h3>
                     </div>
@@ -100,7 +127,7 @@ const Comments = ({ room_id }) => {
                         <div className="edit-functions">
                             <p id='reply'>Reply</p>
                             { user == comment.user_id? <p id='Edit'>Edit</p> : "" }
-                            { user == comment.user_id? <p id='delete'>Delete</p> : "" }
+                            { user == comment.user_id? <p id='delete' onClick={() => handleDelete(comment.user_id,comment.id)}>Delete</p> : "" }
                         </div>
                     </div>
                 </div>

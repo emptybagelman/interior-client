@@ -4,9 +4,27 @@
     background-color: var(--bg);
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 
     &>*{
         padding: 10px 10%;
+    }
+
+    #add-comment-btn{
+        font-size: 0.8rem;
+        cursor: pointer;
+        outline: solid 1px var(--bg);
+        // align-self: center;
+        margin: 20px 30% ;
+        text-align: center;
+        border-radius: 25px;
+        justify-self: flex-start;
+        background-color: var(--beige);
+        color: var(--bg);
+        transition: 0.1s ease-in-out;
+        &:hover{
+            filter: invert(1);
+        }
     }
 
     h1{
@@ -15,9 +33,49 @@
         font-weight: normal;
     }
 
-    .add-content{
+    .add-comment{
+        align-self: center;
+        margin-bottom: 40px;
         form{
-
+            display: grid;
+            // justify-content: center;
+            align-items: center;
+            grid-template-columns: 1fr 0.2fr;
+            label{
+                font-size: 0.8rem;
+                grid-column: span 2;
+                text-align: left;
+                margin-left: 10px;
+                margin-bottom: 5px;
+            }
+            textarea{
+                font-size: 0.8rem;
+                height: 3rem;
+                background: none;
+                color: var(--beige);
+                outline: solid 1px var(--beige);
+                border: none;
+                padding: 5px 15px;
+                margin-right: 25px;
+                resize: none;
+                border-radius: 10px;
+            }
+            button{
+                border: none;
+                background-color: var(--beige);
+                outline: solid 1px var(--bg);
+                font-size: 0.8rem;
+                font-family: var(--font);
+                letter-spacing: -1.4px;
+                padding: 8px 20px;
+                margin: 2px;
+                border-radius: 25px;
+                cursor: pointer;
+                transition: 0.1s ease-in-out;
+                &:hover{
+                    filter: invert(1);
+                }
+            }
         }
     }
 
@@ -48,23 +106,26 @@
                 display: flex;
                 flex-direction: column;
                 &>p{
-                    outline: solid 1px var(--beige);
+                    // outline: solid 1px var(--beige);
                     text-align: justify;
                     font-size: 0.8rem;
                     letter-spacing: -1.2px;
                     padding: 5px 15px;
-                    max-width: 100%;
+                    margin-right: 100px;
+                    max-width: 80%;
+                    word-wrap: break-word;
                 }
 
                 .edit-functions{
                     display: flex;
                     justify-content: left;
-                    
+                    margin-left: 20px;
                     &>p{
-                        margin-right: 50px;
+                        margin-right: 20px;
                         cursor: pointer;
-
+                        font-size: 0.6rem;
                         &:hover{
+                            text-decoration: underline;
 
                         }
                     }
