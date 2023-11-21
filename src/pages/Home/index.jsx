@@ -66,6 +66,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     // Add a scroll event listener when the component mounts
     window.addEventListener("scroll", handleScroll);
 

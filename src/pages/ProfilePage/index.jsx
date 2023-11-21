@@ -20,6 +20,11 @@ const Profile = () => {
   const apiUrl =
     "https://res.cloudinary.com/de2nposrf/image/upload/v1697042277/static/default_pfp.png"; 
 
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    },[])
+
   useEffect(() => {
     axios
       .get(`${baseUrl}/users/name/${usersUsername}`)

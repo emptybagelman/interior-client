@@ -1,14 +1,4 @@
 
-:root{
-  --bg: hsl(263, 67%, 2%);
-  --fg: hsl(244, 11%, 50%);
-  --outline: rgba(25,23,30);
-  --outlinefocus: rgba(170,171,172);
-  --font : #009688;
-  font-size: 24px;
-  font-family: 'Space Grotesk', sans-serif;
-}
-
 body{
   margin: 0;
   padding: 0;
@@ -46,9 +36,9 @@ body{
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #00000077;
-  color: #ffffff;
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--beige);
+  font-family: var(--font);
   text-align: center;
   line-height: 40px;
   font-weight: 100;
@@ -64,10 +54,10 @@ body{
   width: 200px;
   padding: 20px;
   border-radius: 4px;
-  background: #00000077;
-  color: #ffffff;
+  background: var(--bg);
+  color: var(--beige);
   line-height: 1.3em;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font);
   text-align: center;
   font-weight: 100;
   font-size: 14px;
@@ -131,10 +121,10 @@ body{
   color: white; 
   width: 100%;
   // height: 200px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   background-color: var(--bg);
-  opacity: 0.8;
+  opacity: 0.9;
   // transition: 0.5s ease;
   // overflow-y: scroll;
   // overflow-x: hidden;
@@ -143,10 +133,10 @@ body{
 .top{
   display: flex;
   width: 100%;
+  // height: 100px;
   justify-content: space-evenly;
   align-items: center;
-  border-bottom: var(--beige) 2px solid;
-  height: 80px;
+  // border-bottom: var(--beige) 2px solid;
 
   div{
     display: flex;
@@ -155,6 +145,7 @@ body{
 
 
 .bottom{
+  border-top: var(--beige) 2px solid;
   position: relative;
   // margin-top: 100px;
   height: auto;
@@ -182,17 +173,17 @@ body{
 }
 
 .close{
-  animation: 0.5s close-anim forwards; 
+  animation: 0.5s close-anim forwards;
 }
 
 @keyframes open-anim {
-  0%{top:90%}
-  100%{top:60%}
+  0%{top:85%}
+  100%{top:40%}
 }
 
 @keyframes close-anim {
-  0%{top:60%}
-  100%{top:90%}
+  0%{top:40%}
+  100%{top:85%}
 }
 
 .comments-button {
@@ -267,11 +258,13 @@ body{
   border-radius: 20px;  
   transition: transform 0.2s ease-in-out;
   overflow: hidden;
+  outline: solid 1px var(--beige);
 }
 
 .item-caption{
   color: var(--beige);
-  background-color: rgba(0,0,0,0.8);
+  background-color: var(--bg);
+  opacity: 0.9;
   width: 100%;
   text-align: left;
   font-family: 'Space Grotesk', sans-serif;
@@ -357,7 +350,7 @@ body{
 
 .description {
     margin: 10px 0;
-    color: white;
+    color: var(--beige);
     position: absolute;
     bottom: 20px;
     text-align: center;
@@ -399,19 +392,19 @@ body{
 .page.dimmed .item, 
 .page.dimmed .item-caption
 {
-  background-color: black;
+  background-color: var(--bg);
   opacity: 1;
 }
 
 .bedroom__item-container.dimmed {
-  background-color: black;
+  background-color: var(--bg);
   opacity: 1;
 
 }
 
 .page.dimmed .item-container{
   pointer-events: none; 
-  background-color: black;
+  background-color: var(--bg);
   opacity: 1;
 
 }
@@ -423,7 +416,7 @@ align-items: center;
 }
 
 .room-title {
-  color:white;
+  color:var(--beige);
   margin-top: 50px;
   // margin-left: 125px;
   margin-bottom: 10px

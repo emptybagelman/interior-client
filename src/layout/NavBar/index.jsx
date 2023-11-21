@@ -84,7 +84,7 @@ const NavBar = () => {
           <div className="logout-nav">
             {user ? (
               <li>
-                <NavLink to="/" onClick={logout} onClick={handleMenuClick}>
+                <NavLink to="/" onClick={() => {logout();handleMenuClick()}}>
                   Log Out
                 </NavLink>{" "}
               </li>

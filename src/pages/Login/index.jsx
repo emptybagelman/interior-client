@@ -31,6 +31,10 @@ const Login = () => {
     }
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[])
+
   return (
     <div id='login-page' onKeyDown={keyboardSwitch} tabIndex={0} aria-label='Press space to switch between login and register'>
 

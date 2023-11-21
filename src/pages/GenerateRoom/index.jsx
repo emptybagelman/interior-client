@@ -9,7 +9,7 @@ import axios from 'axios'
 
 const GenerateRoom = () => {
 
-    const { user } = useAuth()
+    const { user,width } = useAuth()
 
     const [fileState,setFileState] = useState()
 
@@ -57,11 +57,18 @@ const GenerateRoom = () => {
 
     const cubeMapStyle = {
         "width": "800px",
-        "height": "600px",
+        "min-height": "600px",
         "position": "relative",
         "border": "1px solid #888",
-        "background": "#eee",
-        "marginTop": "15px"
+        "background": "var(--beige)",
+      }
+
+      const cubeMapStyleSmall = {
+        "width": "400px",
+        "min-height": "300px",
+        "position": "relative",
+        "border": "1px solid #888",
+        "background": "var(--beige)",
       }
 
     let finished = 0;
@@ -505,8 +512,10 @@ const GenerateRoom = () => {
 
 ///////////////////////////////////////////////////////////////////////
 
-
-
+    // scroll to top on mount
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    },[])
 
     useEffect(() => {
         if(!imageTypeSelect){
@@ -550,10 +559,10 @@ const GenerateRoom = () => {
 
     return (
         <div id="wrapper" data-testid={"wrapper"} >
-            <div className="generator-container" data-testid={"generator-container"}>
+            <div className="generator-container" data-testid={"generator-container"} style={imageTypeSelect ? {} : {"justifyContent":"center"}}>
                 <div id='maptype-selector'>
-                    <div id="panorama-selector" onClick={handleImageTypeSelect} style={!imageTypeSelect ? activeStyle : inactiveStyle}>PANORAMA</div>
-                    <div id="cubemap-selector" onClick={handleImageTypeSelect} style={imageTypeSelect ? activeStyle : inactiveStyle}>CUBEMAP</div>
+                    <div id="panorama-selector" onClick={imageTypeSelect ? handleImageTypeSelect : ""} style={!imageTypeSelect ? activeStyle : inactiveStyle}>PANORAMA</div>
+                    <div id="cubemap-selector" onClick={!imageTypeSelect ? handleImageTypeSelect : ""} style={imageTypeSelect ? activeStyle : inactiveStyle}>CUBEMAP</div>
                 </div>
                 {imageTypeSelect 
                 ? <QuestionHelp title={panoramicQuestionMark.header} content={panoramicQuestionMark.body} summaryContent={panoramicQuestionMark.summaryContent} image={panoramicQuestionMark.image} />
@@ -561,8 +570,12 @@ const GenerateRoom = () => {
                 : <QuestionHelp title={cubeQuestionMark.header} content={cubeQuestionMark.body} summaryContent={cubeQuestionMark.summaryContent} image={cubeQuestionMark.image} />
                 }
                 
+                {imageTypeSelect 
+                    ?  <h2 className='cubemap-header'>Upload a CubeMap</h2>
+                    :  <h2 className='cubemap-header'>Upload a Panorama</h2>
+                }
                 
-                <div id="cubemap" style={ imageTypeSelect ? cubeMapStyle : {}}>
+                <div id="cubemap" style={ imageTypeSelect ? width > 850 ? cubeMapStyle : cubeMapStyleSmall : {}}>
                     <output id="faces" ref={facesRef} style={ imageTypeSelect ? {"display":"block"} : {"display":"none"}}></output>
                 </div>
                 <canvas id="generateCanvas" ref={canvas} style={{"display":"none"}}></canvas>
@@ -610,7 +623,6 @@ const GenerateRoom = () => {
                 : 
 
                 <form ref={formRef} onSubmit={handleCubeMapSubmit} >
-                    <h2 id='cubemap-header'>Upload a CubeMap</h2>
                     {/* cubemap inputs */}
                     <div id="cubemap-inputs">
                         <div id="px">

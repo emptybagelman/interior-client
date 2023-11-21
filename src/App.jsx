@@ -37,6 +37,7 @@ export default function App() {
   },[user])
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     function handleResize(){
       setWidth(window.innerWidth)
     }
