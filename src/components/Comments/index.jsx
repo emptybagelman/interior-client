@@ -5,7 +5,7 @@ import { useAuth } from '../../contexts'
 
 const Comments = ({ room_id }) => {
 
-    const { user,usersUsername } = useAuth()
+    const { user,usersUsername, width } = useAuth()
     const [ commentData, setCommentData ] = useState(null)
     const [ newComment, setNewComment ] = useState(null)
 
@@ -90,7 +90,7 @@ const Comments = ({ room_id }) => {
         {/* {room_id} */}
         
         {
-            user && !addToggle? <p id='add-comment-btn' onClick={() => setAddToggle(!addToggle)}>{ !addToggle ? "Add Comment" : "Cancel" }</p> : ""
+            user && !addToggle? <button id='add-comment-btn' onClick={() => setAddToggle(!addToggle)}>{ !addToggle ? width > 500 ? "Add Comment" : "Comment" : "Cancel" }</button> : ""
         }
 
         {
@@ -99,7 +99,7 @@ const Comments = ({ room_id }) => {
             <div className="add-comment">
                 <form onSubmit={handleCommentSubmit}>
                     <label htmlFor="content">{usersUsername}</label>
-                    <textarea value={newComment} onChange={handleInput} cols={40} placeholder='Add a comment...'/>
+                    <textarea value={newComment} onChange={handleInput} cols={width > 600 ? 40 : width > 350 ? 30 : 25} placeholder='Add a comment...'/>
                     
                     <div className="button-div">
                         <button type='reset' onClick={() => setAddToggle(!addToggle)}>Cancel</button>

@@ -141,12 +141,12 @@ scene.backgroundIntensity = 1
       <div ref={containerRef} className="environment-map" />
       {/* style={ showComments ? {"top":"50vh","margin":"0"} : {} } */}
       <div className={showComments ? "like-bar open" : 'like-bar close'} >
-        <div className="top">
+        <div className="top" style={!user ? {"justifyContent":"center"} : {}}>
           {
             user 
             ? 
             <div className='like-header'>
-              {width > 350 ? <p className='favourites'>Add to favourites</p> : ""}
+              {width > 350 ? <p className='favourites'>Add to favourites</p> : "" }
               <Heart isClick={isClick} onClick={handleLike} />
             </div>
             : ""
@@ -155,9 +155,13 @@ scene.backgroundIntensity = 1
             {width > 700 ? "Comments" : ""} <AiOutlineComment />
           </button>
         </div>
-        <div className="bottom">
-          <Comments room_id={roomId}/>
-        </div>
+        {
+          showComments ?
+          <div className="bottom">
+            <Comments room_id={roomId}/>
+          </div>
+          : ""
+        }
       </div>
     </>
   );

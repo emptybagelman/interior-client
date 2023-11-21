@@ -4,6 +4,7 @@
     background-color: var(--bg);
     display: flex;
     flex-direction: column;
+
     overflow-x: hidden;
 
     &>*{
@@ -14,14 +15,15 @@
         font-size: 0.8rem;
         cursor: pointer;
         outline: solid 1px var(--bg);
-        // align-self: center;
         margin: 20px 30% ;
-        text-align: center;
         border-radius: 25px;
-        justify-self: flex-start;
         background-color: var(--beige);
         color: var(--bg);
         transition: 0.1s ease-in-out;
+        border: none;
+        font-family: var(--font);
+        text-align: center;
+
         &:hover{
             filter: invert(1);
         }
@@ -111,7 +113,7 @@
                     font-size: 0.8rem;
                     letter-spacing: -1.2px;
                     padding: 5px 15px;
-                    margin-right: 100px;
+                    // margin-right: 100px;
                     max-width: 80%;
                     word-wrap: break-word;
                 }
@@ -134,7 +136,7 @@
         }
     }
 
-    @media (max-width: 500px){
+    @media (max-width: 600px){
         #add-comment-btn{
             font-size: 0.6rem;
             white-space: nowrap;
@@ -165,6 +167,21 @@
         }
         h1{
             font-size: 1.2rem;
+        }
+        .add-comment{
+            form{
+                display: flex;
+                flex-direction: column;
+                textarea{
+                    margin: 0;
+                }
+                .button-div{
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-around;
+                    margin-top: 5px;
+                }
+            }
         }
     }
 }

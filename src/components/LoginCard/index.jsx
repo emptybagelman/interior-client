@@ -98,7 +98,7 @@ const LoginCard = ({ toggleSwitch,focusStyle,changeState }) => {
             <img src="https://res.cloudinary.com/de2nposrf/image/upload/v1697042277/static/lamp.png" alt="lamp" id='left-lamp' style={!toggleSwitch ? lampShade : {}}/>
             <div id="llight" style={!toggleSwitch ? showLight : {}}></div>
         </div>
-        <QuestionHelp active={toggleSwitch} title={"Logging In"} content={<p>Made an account? <br></br> Then please enter your username and password in the entries below.<br /><br />Haven't made one? Hit the switch in the center!</p>}/>
+        <QuestionHelp active={toggleSwitch} title={"Logging In"} content={<p>Made an account? <br></br> Then please enter your username and password in the entries below.<br /><br />Haven't made one? Hit the switch!</p>}/>
         <header>
             <h2>Log In</h2>
             {/* <p>*placeholder text*</p> */}

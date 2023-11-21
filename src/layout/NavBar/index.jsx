@@ -43,21 +43,22 @@ const NavBar = () => {
       <nav className={width <= 850 ? "mobile" : "nav-row"}>
         <img onClick={handleMenuClick} id="logo" src={width <= 850 ? 'https://res.cloudinary.com/de2nposrf/image/upload/v1697042188/static/small_logo.png' : 'https://res.cloudinary.com/de2nposrf/image/upload/v1697042188/static/logo.png'} alt="API Image" />
 
-        <ul  style={width <= 850 ? menuActive ? {"display":"block"} : {"display":"none"} : {} }>
+        <ul className={width <= 850 ? menuActive ? "open-menu" : "close-menu" : ""} style={width <= 850 ? menuActive ? {"display":"block"} : {"display":"none"} : {} }>
+          { width <= 850 ? <p onClick={handleMenuClick}>X</p> : "" }
           <li>
-            <NavLink to="/" style={width > 850 ? navActive : {} }>
+            <NavLink to="/" style={width > 850 ? navActive : {} } onClick={handleMenuClick}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/explore" style={width > 850 ? navActive : {} }>
+            <NavLink to="/explore" style={width > 850 ? navActive : {} } onClick={handleMenuClick}>
               Explore
             </NavLink>
           </li>
           <div className="generate-nav">
             {user ? (
               <li>
-                <NavLink to="/generate" style={width > 850 ? navActive : {} }>
+                <NavLink to="/generate" style={width > 850 ? navActive : {} } onClick={handleMenuClick}>
                   Create
                 </NavLink>
               </li>
@@ -68,13 +69,13 @@ const NavBar = () => {
           <div className="login-nav">
             {user ? (
               <li>
-                <NavLink to="/profile" style={width > 850 ? navActive : {} }>
+                <NavLink to="/profile" style={width > 850 ? navActive : {} } onClick={handleMenuClick}>
                   Profile
                 </NavLink>
               </li>
             ) : (
               <li>
-                <NavLink to="/login" style={width > 850 ? navActive : {} }>
+                <NavLink to="/login" style={width > 850 ? navActive : {} } onClick={handleMenuClick}>
                   Login
                 </NavLink>
               </li>
@@ -83,7 +84,7 @@ const NavBar = () => {
           <div className="logout-nav">
             {user ? (
               <li>
-                <NavLink to="/" onClick={logout}>
+                <NavLink to="/" onClick={logout} onClick={handleMenuClick}>
                   Log Out
                 </NavLink>{" "}
               </li>
