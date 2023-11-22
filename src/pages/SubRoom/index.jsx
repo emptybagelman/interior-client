@@ -1,6 +1,5 @@
 import React, {useState, useEffect,useRef } from 'react'
-import { Room, StylesComponent, BackButton } from '../../components'
-import Heart from "react-animated-heart";
+import { Room, StylesComponent, BackButton, LikeButton } from '../../components'
 import { AiFillEye } from 'react-icons/ai'
 import './explore.scss'
 import { useAuth, useRoom } from '../../contexts';
@@ -17,7 +16,7 @@ const SubRoom = () => {
 
     const [roomArrayData, setRoomArrayData] = useState(null)
 
-    const [likedImages, setLikedImages] = useState(null);
+    // const [likedImages, setLikedImages] = useState(null);
     const [imagesWithStyles, setImagesWithStyles] = useState([])
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -38,47 +37,34 @@ const SubRoom = () => {
   
 // new Array(roomArray.length).fill(false)
 
-   useEffect(() => {
-    try{
-      const newImagesWithStyles = roomArray.map((image, index) => ({
-        ...image,
-        clickCount: image.clickCount || 0,  
-        style: <StylesComponent seed={index} />,
-      }));
-      setImagesWithStyles(newImagesWithStyles);
-      setLikedImages(new Array(roomArray.length).fill(false))
-    }catch (error){
-      console.log("");
-    }
+  //  useEffect(() => {
+  //   try{
+  //     const newImagesWithStyles = roomArray.map((image, index) => ({
+  //       ...image,
+  //       clickCount: image.clickCount || 0,  
+  //       style: <StylesComponent seed={index} />,
+  //     }));
+  //     setImagesWithStyles(newImagesWithStyles);
+  //     setLikedImages(new Array(roomArray.length).fill(false))
+  //   }catch (error){
+  //     console.log("");
+  //   }
 
-  }, [roomArray]);
+  // }, [roomArray]);
+    
+  // const sendLikeData = async (user, roomId) => {
+  //   try {
+  //     const response = await axiosInstance.post('/likes', { user_id: user, room_id: roomId });
   
-  const toggleLike = async (index) => {
-    const newLikedImages = [...likedImages];
-    newLikedImages[index] = !newLikedImages[index];
-    setLikedImages(newLikedImages);
+  //     if (!response.data) {
+  //       throw new Error('Failed to send data');
+  //     }
   
-  
-    if (newLikedImages[index]) {
-      // const roomId = imagesWithStyles[index].id;
-      const roomId = hoveredImageIndex;
-      await sendLikeData(user, roomId);
-    }
-  };
-  
-  const sendLikeData = async (user, roomId) => {
-    try {
-      const response = await axiosInstance.post('/likes', { user_id: user, room_id: roomId });
-  
-      if (!response.data) {
-        throw new Error('Failed to send data');
-      }
-  
-      console.log('Like created', response.data);
-    } catch (error) {
-      console.error("There was an error sending data:", error);
-    }
-  };
+  //     console.log('Like created', response.data);
+  //   } catch (error) {
+  //     console.error("There was an error sending data:", error);
+  //   }
+  // };
 
   async function callRooms(){
     const call = await axiosInstance.get(`/rooms/${room}`).then(data => {
@@ -132,20 +118,6 @@ const SubRoom = () => {
       
       <div className={`page${selectedImage ? ' dimmed' : ''}`}>
 
-          {/* {
-            roomArrayData
-             && 
-            roomArrayData.map((room,index) => (
-              <div className="item-container" key={index}>
-                <img src="./src/assets/tempimg.png" alt="" className="item" />
-                <div className="item-caption">
-                  <h3>{room.name.split("_").join(" ")}</h3>
-                </div>
-              </div>
-            ))
-          } */}
-
-
           { 
           roomArray 
           ? 
@@ -158,23 +130,19 @@ const SubRoom = () => {
             >
             <img className='item' src={image.src} alt={image.alt} />
             <div className="item-caption">
-              <h3>{image.name.split("_").join(" ")}</h3>
-              <p>Dimensions: {image.dimensions}</p>
-              <p>Description: {image.description}</p>
-              <p>Theme: {image.theme}</p>
-              {hoveredImageIndex == image.id && (
-                  <div className="icon-container">
-              
-                  <div className="heart-container" onClick={(e) => { e.stopPropagation(); toggleLike(image.id); }}>
-                      <Heart isClick={likedImages[image.id]} />
-                  </div>
-                  
-                  <div className="click-count">
-                      <AiFillEye />
-                      <span> {image.clickCount}</span>
-                  </div>
-                </div>
-            )}
+              <div>
+                <h3>{image.name.split("_").join(" ")}</h3>
+                {
+                  hoveredImageIndex ?                 
+                  <>
+                    <p>Dimensions: {image.dimensions}</p>
+                    <p>Description: {image.description}</p>
+                    <p>Theme: {image.theme}</p>
+                  </>
+                  : ""
+                }
+              </div>
+              {hoveredImageIndex ? <LikeButton imageId={image.id} /> : ""}
             </div>
         
         

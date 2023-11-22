@@ -12,7 +12,7 @@ import { AiOutlineComment } from 'react-icons/ai'
 import { useAuth } from '../../contexts/index.jsx';
 import Room from '../Room';
 import EmailButton from '../Email';
-import Comments from '../Comments';
+import { Comments, LikeButton } from "../../components"
 
 
 const EnvironmentMap = ({ mapUrls, roomId }) => {
@@ -147,7 +147,7 @@ scene.backgroundIntensity = 1
             ? 
             <div className='like-header'>
               {width > 350 ? <p className='favourites'>Add to favourites</p> : "" }
-              <Heart isClick={isClick} onClick={handleLike} />
+              <LikeButton imageId={roomId} />
             </div>
             : ""
           }

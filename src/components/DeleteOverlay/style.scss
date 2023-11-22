@@ -14,12 +14,12 @@
 
 #delete-wrapper{
     width: 250px;
-    height: 40%;
+    height: 350px;
     background-color: var(--beige);
     border-radius: 25px;
     padding: 20px;
-    margin-top: 10%;
-    position: relative;
+    position: absolute;
+    top: 20%;
 }
 
 #delete-wrapper>h2,

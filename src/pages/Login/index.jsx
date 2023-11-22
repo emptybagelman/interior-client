@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts'
 
 const Login = () => {
 
-  const [toggleSwitch, setToggleSwitch] = useState(true)
+  const [toggleSwitch, setToggleSwitch] = useState(false)
   const { width } = useAuth()
 
   const focusStyle = {

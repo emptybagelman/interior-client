@@ -1,5 +1,5 @@
 import React,{ useEffect } from 'react'
-import "./style.css"
+import "./style.scss"
 import axios from 'axios'
 import axiosInstance from '../../helpers'
 

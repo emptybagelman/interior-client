@@ -4,6 +4,7 @@ import axiosInstance from '../../helpers';
 import "./style.scss"
 import { EditOverlay, DeleteOverlay } from "../../components"
 import axios from 'axios';
+import { useAuth } from '../../contexts';
 
 const UserProfile = ({ user, userRooms, loading, updateUser, imageUrl1, setImageUrl1, setRefresh }) => {
   const inputRef = useRef(null)
@@ -19,6 +20,8 @@ const UserProfile = ({ user, userRooms, loading, updateUser, imageUrl1, setImage
   const [imgToDelete,setImgToDelete] = useState(null)
 
   const [toggleDeleteBtn,setToggleDeleteBtn] = useState(false)
+
+  const { width } = useAuth()
 
   async function getUserRooms() {
     const rooms = []
@@ -207,16 +210,24 @@ const UserProfile = ({ user, userRooms, loading, updateUser, imageUrl1, setImage
                               <p key={index} id='profile-imgs-text'>{room.name.split("_").join(" ")}</p>
                               
                             </Link>
-                            {hoverImage == room.id && (
-                              <div
-                              className="config"
-                              onMouseEnter={() => setHoverImage(room.id)}
-                              onMouseLeave={() => setHoverImage(null)}
-                              >
+                            {
+                              width > 500
+                              ?
+                              hoverImage == room.id && (
+                                <div className="config" onMouseEnter={() => setHoverImage(room.id)} onMouseLeave={() => setHoverImage(null)} >
+                                  <p id="edit">⚙</p>
+                                  <p id='delete' onClick={() => toDelete(room)}>-</p>
+                                </div>
+                              )
+                              :
+                              <div className="config" onMouseEnter={() => setHoverImage(room.id)} onMouseLeave={() => setHoverImage(null)} >
                                 <p id="edit">⚙</p>
                                 <p id='delete' onClick={() => toDelete(room)}>-</p>
                               </div>
-                            )}
+
+
+
+                            }
                           </div>
                         ))
 

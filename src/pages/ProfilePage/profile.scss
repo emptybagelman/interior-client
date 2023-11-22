@@ -13,11 +13,7 @@
 
 }
 
-#profile-container>div {
-    padding: 2rem;
-}
-
-#profile-container #sidebar {
+#sidebar {
     color: white;
     /* width: 40vw; */
     height: 75vh;
@@ -26,6 +22,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 #profile-icon-container1 {
     display: flex;
     flex-direction: column;
@@ -39,10 +36,9 @@
     padding-bottom: 0.75rem;
 }
 
-#profile-container #main-content {
-    /* width: 100vw; */
-    color: white;
-
+#main-content {
+    color: var(--beige);
+    padding: 5px;
 }
 
 #main-content input {
