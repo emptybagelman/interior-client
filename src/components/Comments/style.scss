@@ -49,6 +49,15 @@
                 text-align: left;
                 margin-left: 10px;
                 margin-bottom: 5px;
+                display: flex;
+                p{
+                    overflow: hidden;
+                    white-space: nowrap;
+                    font-size: 0.6rem;
+                    margin-left: 15px;
+                    max-width: 20ch;
+                    text-overflow: ellipsis;
+                }
             }
             textarea{
                 font-size: 0.8rem;

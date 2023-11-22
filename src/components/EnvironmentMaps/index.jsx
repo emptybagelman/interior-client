@@ -15,11 +15,11 @@ import EmailButton from '../Email';
 import { Comments, LikeButton } from "../../components"
 
 
-const EnvironmentMap = ({ mapUrls, roomId }) => {
+const EnvironmentMap = ({ mapUrls, roomId, user_id }) => {
 
   const containerRef = useRef(null);
   const [isClick, setClick] = useState(false);
-  const [showComments, setShowComments] = useState(false); 
+  const [showComments, setShowComments] = useState(false);
 
   const handleCommentsToggle = () => {
     setShowComments(prevShowComments => !prevShowComments);
@@ -147,7 +147,7 @@ scene.backgroundIntensity = 1
             ? 
             <div className='like-header'>
               {width > 350 ? <p className='favourites'>Add to favourites</p> : "" }
-              <LikeButton imageId={roomId} />
+              <LikeButton imageId={roomId} user_id={user_id} />
             </div>
             : ""
           }
@@ -158,7 +158,7 @@ scene.backgroundIntensity = 1
         {
           showComments ?
           <div className="bottom">
-            <Comments room_id={roomId}/>
+            <Comments room_id={roomId} />
           </div>
           : ""
         }

@@ -142,7 +142,8 @@ const SubRoom = () => {
                   : ""
                 }
               </div>
-              {hoveredImageIndex ? <LikeButton imageId={image.id} /> : ""}
+              <LikeButton imageId={image.id} user_id={image.user_id} />
+              {/* {hoveredImageIndex ? <LikeButton imageId={image.id} user_id={image.user_id} /> : ""} */}
             </div>
         
         

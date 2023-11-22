@@ -1,0 +1,11 @@
+.heart-container{
+    position: relative;
+    transform: translateY(-5%);
+}
+
+.like-text{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}

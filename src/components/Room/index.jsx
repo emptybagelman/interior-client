@@ -75,7 +75,7 @@ const nextMap = () => {
   return (
     <div className="environment-map-grid">
       {/* <BlobToImage image_id={initialMapIndex} refs={pageRefs} loadedFunc={setLoadedVar} room_name={room_name} roomType={roomType}/> */}
-      <EnvironmentMap roomId={initialMapIndex} mapUrls={mapset ? imageURLs : loading} />
+      <EnvironmentMap roomId={initialMapIndex} user_id={user_id} mapUrls={mapset ? imageURLs : loading} />
     </div>
   );
 };

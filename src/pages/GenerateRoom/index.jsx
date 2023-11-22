@@ -561,8 +561,8 @@ const GenerateRoom = () => {
         <div id="wrapper" data-testid={"wrapper"} >
             <div className="generator-container" data-testid={"generator-container"} style={imageTypeSelect ? {} : {"justifyContent":"center"}}>
                 <div id='maptype-selector'>
-                    <div id="panorama-selector" onClick={imageTypeSelect ? handleImageTypeSelect : ""} style={!imageTypeSelect ? activeStyle : inactiveStyle}>PANORAMA</div>
-                    <div id="cubemap-selector" onClick={!imageTypeSelect ? handleImageTypeSelect : ""} style={imageTypeSelect ? activeStyle : inactiveStyle}>CUBEMAP</div>
+                    <div id="panorama-selector" onClick={!imageTypeSelect ? handleImageTypeSelect : ""} style={!imageTypeSelect ? activeStyle : inactiveStyle}>PANORAMA</div>
+                    <div id="cubemap-selector" onClick={imageTypeSelect ? handleImageTypeSelect : ""} style={imageTypeSelect ? activeStyle : inactiveStyle}>CUBEMAP</div>
                 </div>
                 {imageTypeSelect 
                 ? <QuestionHelp title={panoramicQuestionMark.header} content={panoramicQuestionMark.body} summaryContent={panoramicQuestionMark.summaryContent} image={panoramicQuestionMark.image} />
@@ -570,7 +570,7 @@ const GenerateRoom = () => {
                 : <QuestionHelp title={cubeQuestionMark.header} content={cubeQuestionMark.body} summaryContent={cubeQuestionMark.summaryContent} image={cubeQuestionMark.image} />
                 }
                 
-                {imageTypeSelect 
+                {!imageTypeSelect 
                     ?  <h2 className='cubemap-header'>Upload a CubeMap</h2>
                     :  <h2 className='cubemap-header'>Upload a Panorama</h2>
                 }

@@ -5,9 +5,12 @@ import { useAuth } from '../../contexts'
 
 const Comments = ({ room_id }) => {
 
-    const { user,usersUsername, width } = useAuth()
+    const { user, usersUsername, width } = useAuth()
     const [ commentData, setCommentData ] = useState(null)
     const [ newComment, setNewComment ] = useState(null)
+    const [replyToComment, setReplyToComment] = useState("")
+
+    const [textArea,setTextArea] = useState("")
 
     const [addToggle, setAddToggle] = useState(false)
 
@@ -37,6 +40,14 @@ const Comments = ({ room_id }) => {
         setNewComment("")
     }
 
+    async function handleReply(comment){
+        setAddToggle(!addToggle)
+        
+        const replyTo = `@~${comment.username}`
+        setReplyToComment(comment.comment)
+        setTextArea(replyTo+"...")
+    } 
+
     async function handleCommentSubmit(e){
         e.preventDefault()
 
@@ -49,8 +60,6 @@ const Comments = ({ room_id }) => {
             "parent_id":null,
             "root_id":null,
         }
-
-        console.log(data);
 
         try {
             const newComment = await axiosInstance.post("/comments", data, {
@@ -98,11 +107,11 @@ const Comments = ({ room_id }) => {
             ?
             <div className="add-comment">
                 <form onSubmit={handleCommentSubmit}>
-                    <label htmlFor="content">{usersUsername}</label>
-                    <textarea value={newComment} onChange={handleInput} cols={width > 600 ? 40 : width > 350 ? 30 : 25} placeholder='Add a comment...'/>
+                    <label htmlFor="content">{usersUsername} <p>{replyToComment}</p> </label>
+                    <textarea onChange={handleInput} cols={width > 600 ? 40 : width > 350 ? 30 : 25} placeholder='Add a comment...'>{ textArea }</textarea>
                     
                     <div className="button-div">
-                        <button type='reset' onClick={() => setAddToggle(!addToggle)}>Cancel</button>
+                        <button type='reset' onClick={() => {setAddToggle(!addToggle);clearInput()}}>Cancel</button>
                         <button type="submit">Submit</button>
                     </div>
                 </form>
@@ -127,8 +136,8 @@ const Comments = ({ room_id }) => {
                     <div className="message">
                         <p>{comment.comment}</p>
                         <div className="edit-functions">
-                            <p id='reply'>Reply</p>
-                            { user == comment.user_id? <p id='Edit'>Edit</p> : "" }
+                            <p id='reply' onClick={() => handleReply(comment)}>Reply</p>
+                            {/* { user == comment.user_id? <p id='Edit'>Edit</p> : "" } */}
                             { user == comment.user_id? <p id='delete' onClick={() => handleDelete(comment.user_id,comment.id)}>Delete</p> : "" }
                         </div>
                     </div>

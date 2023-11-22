@@ -2,10 +2,12 @@ import React,{ useState, useEffect } from 'react'
 import Heart from "react-animated-heart";
 import { useAuth } from '../../contexts';
 import axiosInstance from '../../helpers';
+import "./style.scss"
 
-const LikeButton = ({ imageId  }) => {
+const LikeButton = ({ imageId, user_id }) => {
 
     const [ isClick, setClick] = useState(false)
+    const [ count, setCount ] = useState(null)
     const { user } = useAuth()
 
     async function loadLike(){
@@ -21,6 +23,16 @@ const LikeButton = ({ imageId  }) => {
             } catch (error) {
                 console.log("not logged in",error);
             }
+        }
+    }
+
+    async function getLikeCount(){
+        try {
+            const getCount = await axiosInstance.get(`/likes/user/${user_id}`)
+            const count = await getCount.data
+            setCount(count.count)
+        } catch (error) {
+            console.log("cannot get count", error);
         }
     }
 
@@ -40,15 +52,18 @@ const LikeButton = ({ imageId  }) => {
                     console.log("cannot post like!", error);
                 }
             }
+            getLikeCount()
         }
     }
 
     useEffect(() => {
+        getLikeCount()
         loadLike()
     },[])
 
   return (
     <div className="heart-container" onClick={(e) => { e.stopPropagation(); }}>
+        <div className="like-text">{count}</div>
         <Heart isClick={isClick} onClick={updateLike} />
     </div>
   )
