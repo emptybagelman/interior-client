@@ -1,7 +1,9 @@
+@import "./src/components/Styles/mixins/flex";
+@import "./src/components/Styles/mixins/colors";
+
 #left-rooms-container,
 #right-rooms-container{
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
     width: 100%;
     margin: 20px;
 }
@@ -21,13 +23,13 @@
 }
 
 #profile-imgs-text{
+    @include main-palette;
     font-size: 80%;
-    background-color: var(--beige);
-    color: var(--bg);
     height: 70px;
     padding-top: 10px;
     position: relative;
     border-radius: 0px 0px 25px 25px;
+    outline: none;
 }
 
 .imgs-container{
@@ -64,24 +66,20 @@
 }
 
 .config>*{
-    color: var(--bg);
-    background-color: var(--beige);
-    outline: solid 1px black;
+    @include flex-full-center;
+    @include main-palette;
+
     width: 1.5rem;
     height: 1.5rem;
     font-size: 1.5rem;
     margin-bottom: 5px;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     box-shadow: 0px 2px 2px 2px rgba(0,0,0,0.5);
 }
 
 .config *:hover{
+    @include main-palette-inverse;
     outline: none;
-    background-color: var(--bg);
-    color: var(--beige);
     cursor: pointer;
 }
 

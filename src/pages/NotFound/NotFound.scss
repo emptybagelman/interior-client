@@ -1,9 +1,9 @@
+@import "./src/components/Styles/mixins/colors";
+@import "./src/components/Styles/mixins/flex";
+
 #section {
+  @include flex-column-align-center;
   height: 50vh;
-  /* scroll-snap-align: center; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -15,7 +15,6 @@
 
 #container {
   height: 100%;
-  /* scroll-snap-align: center; */
   width: 1400px;
   display: flex;
   justify-content: space-between;
@@ -47,7 +46,7 @@
 
 #h1 {
   font-size: 74px;
-  color: #ffffff;
+  color: var(--beige);
 }
 
 @media only screen and (max-width: 768px) {
@@ -59,7 +58,7 @@
 
 #p {
   font-size: 24px;
-  color: lightgray;
+  color: var(--beige);
   padding: 20px;
   text-align: center;
 }
@@ -73,30 +72,19 @@
 }
 
 #button_notfound {
-  background-color: #009688;
-  color: white;
+  @include main-palette-inverse;
   font-weight: 400;
   width: 150px;
   padding: 10px;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-left: 20px;
 }
 
-/* @media only screen and (max-width: 768px) {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  } */
+
 #right {
-  /* height: 100%; */
-  /* scroll-snap-align: center; */
   margin-right: 100px;
   width: 1000px;
-  /* display: flex; */
-  /* justify-content: space-between; */
 }
 
 #img2 {
@@ -110,10 +98,7 @@
   right: 0;
   margin: auto;
   border-radius: 100px;
-  /* float: right;
-    
-    margin-top: 100px;
-    margin-right: 150px; */
+
   animation: animate 2s infinite ease alternate;
 }
 

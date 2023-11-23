@@ -1,5 +1,10 @@
+@import "./src/components/Styles/mixins/flex";
+@import "./src/components/Styles/mixins/colors";
+
+
 .explore-container {
-  margin-top: 10px;
+  color: var(--beige);
+  // margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
@@ -29,17 +34,17 @@
 }
 
 .explore-image:hover {
-  transform: scale(1.01);
+  // transform: scale(1.01);
   filter: brightness(0.8);
   transition: 0.2s ease-in-out;
 }
 .explore-item:hover .title{
   font-size: 3rem;
   transition: 0.2s ease-in-out;
+  color: var(--beige);
 }
 
 .title {
-  color: white;
   font-size: 1.5rem;
   position: absolute;
   top: 45%;

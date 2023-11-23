@@ -1,9 +1,12 @@
+@import "./src/components/Styles/mixins/colors";
+@import "./src/components/Styles/mixins/flex";
+
+
 .nav-row {
-    display: flex;
-    align-items: center;
+    @include flex-align-center;
     justify-content: space-between;
     height: 60px;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font);
     padding: 5px;
 }
 
@@ -34,10 +37,11 @@
 }
 
 .nav-row a:hover{
+    @include main-palette-inverse;
+    outline-width: 2px;
     cursor: pointer;
-    background-color: var(--outline);
-    outline: solid 2px var(--beige);
-    
+    // background-color: var(--bg);
+    // outline: solid 2px var(--beige);
 }
 
 .nav-row a:visited{
@@ -60,31 +64,33 @@
     position: fixed;
     right: 0;
     z-index: 1111;
-    
+
+    .active{
+        background-color: var(--bg);
+        &:hover{
+            background-color: var(--beige)
+        }
+    }
 
     img{
+        @include main-palette;
         width: 50px;
         border-radius: 10px;
-        background-color: var(--beige);
-        outline: solid 2px var(--bg);
         padding: 2px 0px 5px 0px;
         margin: 10px;
     }
 
     ul{
+        @include flex-column-align-center;
+        @include main-palette-inverse;
         position: absolute;
         top: 0;
         right: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         width: 100px;
         height: 100vh;
         padding: 0;
         overflow: hidden;
-        // padding: 5px;
-        outline: solid 2px var(--beige);
-        background-color: var(--bg);
+        outline-width: 2px;
 
         p{
             text-align: center;
@@ -103,7 +109,6 @@
         padding: 10px 0px;
         font-size: 0.8rem;
 
-
         &:hover{
             background-color: var(--beige);
         }
@@ -111,6 +116,7 @@
 
     li:hover a{
         color: var(--bg);
+        background-color: var(--beige);
     }
 
     a{

@@ -1,3 +1,6 @@
+@import "./src/components/Styles/mixins/colors";
+@import "./src/components/Styles/mixins/flex";
+
 #questions{
     position: absolute;
     right: 5%;
@@ -8,43 +11,35 @@
 }
 
 #qmark{
+    @include flex-full-center;
+    @include main-palette;
     user-select: none;
-    background-color: #FAF8F2;
     z-index: 10;
     width: 2rem;
     height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 50%;
-    outline: 1px solid var(--bg);
-    color: var(--bg);
     box-shadow: 0px 3px 2px 2px rgba(0,0,0,0.5);
     position: relative;
     transition: 0.1s ease-in-out;
-
 }
 
 #qmark:hover{
+    @include main-palette-inverse;
     cursor: pointer;
-    background-color: var(--bg);
-    outline: 1px solid var(--beige);
-    color: var(--beige);
 }
 
 .qbox{
+    @include main-palette;
     position: absolute;
     display: none;
-    /* left: 50%; */
     top: 0;
     width: 300px;
-    background: linear-gradient(0deg, rgba(15,13,20,1) 0%, #EDE4D9 0%);
+    background: #EDE4D9;
     padding: 10px;
     border-radius: 25px;
-    outline: 2px solid var(--outline);
+    outline-width: 2px;
     font-size: 16px;
     text-align: left;
-    color: var(--bg);
 }
 
 .qbox h3{
@@ -60,15 +55,13 @@
     display: flex;
     justify-content: space-between;
     p{
+        @include main-palette-inverse;
         font-size: 1rem;
-        color: var(--beige);
         width: 2ch;
         height: 2ch;
         padding: 2px;
         text-align: center;
-        background-color: var(--bg);
         border-radius: 50%;
-        outline: solid 1px var(--beige);
         cursor: pointer;
         transition: 0.1s ease-in-out;
 
@@ -107,16 +100,15 @@
 }
 
 .mobile-qbox{
+    @include main-palette;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     padding: 10px;
     border-radius: 20px;
-    outline: solid 2px var(--bg);
-    background: linear-gradient(0deg, rgba(15,13,20,1) 0%, #EDE4D9 0%);
+    background: #EDE4D9;
     z-index: 15;
-    color: var(--bg);
     display: none;
 
     & *{

@@ -1,3 +1,5 @@
+@import "./src/components/Styles/mixins/colors";
+@import "./src/components/Styles/mixins/flex";
 
 body{
   margin: 0;
@@ -5,12 +7,8 @@ body{
   background-color: var(--bg);
 } 
 
-
-
 .room {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-full-center;
   width: 100%;
   height: calc(100vh - 70px);
 
@@ -30,18 +28,17 @@ body{
 
 /* styling of the label - this is the number it is */
 .point .label {
+  @include main-palette-inverse;
   position: absolute;
   top: -20px;
   left: -20px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--bg);
-  color: var(--beige);
-  font-family: var(--font);
+  outline: none;
   text-align: center;
   line-height: 40px;
-  font-weight: 100;
+  font-weight: normal;
   font-size: 18px;
 }
 
@@ -81,23 +78,17 @@ body{
 
 
 .environment-map-grid {
+  @include flex-column-full-center;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  align-items: center;
   height: 100%;
 }
 
 /* new styling for separate grid items - in environment map component and styling of the map itself */
 .environment-map {
+  @include flex-full-center;
   width: 100%;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
 
   canvas{
@@ -110,28 +101,25 @@ body{
 }
 
 .like-header{
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
 }
 
 
 .like-bar {
-  display: flex;
-  flex-direction: column;
-  color: white; 
+  @include flex-column;
+  @include main-palette-inverse;
+  outline: none;
   width: 100%;
   position: fixed;
   bottom: 0;
-  background-color: var(--bg);
   opacity: 0.9;
   overflow-x: hidden;
 }
 
 .top{
-  display: flex;
+  @include flex-align-center;
   width: 100%;
   justify-content: space-evenly;
-  align-items: center;
 
   div{
     display: flex;
@@ -142,7 +130,6 @@ body{
 .bottom{
   border-top: var(--beige) 2px solid;
   position: relative;
-  // margin-top: 100px;
   height: auto;
   overflow: scroll;
   &::-webkit-scrollbar{
@@ -182,34 +169,30 @@ body{
 }
 
 .comments-button {
+  @include main-palette;
   width: 300px;
   height: 50px;
-  // margin-top: 24px;
   font-size: 0.7rem;
   text-decoration: none;
-  outline: solid 1px var(--bg);
   padding: 12px 60px;
   border-radius: 100px;
-  background-color: var(--beige);
-  font-family: var(--font);
   letter-spacing: -1.2px;
-  border: none;
   margin: 20px;
 }
 
-.email-button {
-  width: 54px;
-  height: 50px;
+// .email-button {
+//   width: 54px;
+//   height: 50px;
    
-  border-radius: 30px;
-  background-color: #009688;
-  outline: solid 1px var(--bg);
-  font-size: 0.9em;
-  justify-content: center;
-  align-items: center;
-  margin-top: 24px;
-  margin-left: -32px;
-}
+//   border-radius: 30px;
+//   background-color: #009688;
+//   outline: solid 1px var(--bg);
+//   font-size: 0.9em;
+//   justify-content: center;
+//   align-items: center;
+//   margin-top: 24px;
+//   margin-left: -32px;
+// }
 
 .comments-button:hover{
   cursor: pointer;
@@ -217,17 +200,14 @@ body{
   
 }
 
-.email-button:hover{
-  cursor: pointer;
-  background-color: white;
-  /* outline: solid 2px var(--outlinefocus); */
-  
-}
+// .email-button:hover{
+//   cursor: pointer;
+//   background-color: var(--beige);
+//   /* outline: solid 2px var(--outlinefocus); */
+// }
 
 .center-page-room {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-full-center;
   text-align: center;
   height: 100vh; 
   width: 100vw; 
@@ -257,12 +237,11 @@ body{
 }
 
 .item-caption{
-  color: var(--beige);
-  background-color: var(--bg);
+  @include main-palette-inverse;
+  outline: none;
   opacity: 0.9;
   width: 100%;
   text-align: left;
-  font-family: 'Space Grotesk', sans-serif;
   position: absolute;
   top: 80%;
   padding-left: 15px;
@@ -317,6 +296,7 @@ body{
 }
 
 .fullscreen-div {
+  @include flex-column-full-center;
     margin-top: 0;
     position: fixed;
     top: 0;
@@ -324,10 +304,6 @@ body{
     width: 100%;  
     // transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.9); 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
     &>div{
       width: 100%;
@@ -336,9 +312,6 @@ body{
       overflow: hidden;
     }
 }
-
-
-
 
 .fullscreen-image {
     width: 100%;
@@ -357,7 +330,8 @@ body{
 }
 
 .close-button {
-  font-family: 'Space Grotesk', sans-serif;
+  @include flex-align-center;
+  @include main-palette;
   position: absolute;
   top: 20px;
   right: 20px;
@@ -365,12 +339,7 @@ body{
   font-size: 30px;
   cursor: pointer;
   border-radius: 100px;
-  border: none;
-  display: flex;
-  align-items: center;
   transition: all 0.2s ease-in-out;
-  background-color: var(--beige);
-  outline: solid 1px var(--bg);
 }
 
 .close-button:hover {
@@ -385,7 +354,6 @@ body{
     right: auto;
   }
 }
-
 
 .page.dimmed .item, 
 .page.dimmed .item-caption
@@ -408,21 +376,18 @@ body{
 }
 
 .title-section {
-display: flex;
-justify-content: space-evenly;
-align-items: center;
+  @include flex-align-center;
+  justify-content: space-evenly;
 }
 
 .room-title {
-  color:var(--beige);
+  color: var(--beige);
   margin-top: 50px;
-  // margin-left: 125px;
   margin-bottom: 10px
 }
 
 .back-to-button {
   margin-top: 50px;
-  // margin-right: 130px;
   border-radius: 4px;
   cursor: pointer;
   color: #009688;
@@ -443,17 +408,15 @@ align-items: center;
 }
 
 .click-count {
+  @include flex-align-center;
   position: absolute;
   top: 25px;   
   right: 74px;  
   cursor: pointer;
   height: 50px;
   border-radius: 50px;
-  display: flex;
-  align-items: center;
-  /* background: rgb(240, 240, 240, 0.1); */
   z-index: 10; 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font);
 }
 
 @media screen and (max-width: 767px) {

@@ -1,33 +1,28 @@
+@import "./src/components/Styles/mixins/colors";
+@import "./src/components/Styles/mixins/flex";
+
 * {
     margin: 0;
 }
 #profile-container {
-    display: flex;
-    color: aliceblue;
+    @include flex-justify-center;
+    color: var(--biege);
     padding-top: 25px;
-    justify-content: center;
     text-align: center;
     max-width: 100vw;
     position: relative;
-    // overflow: hidden;
 
 }
 
 #sidebar {
-    color: white;
-    /* width: 40vw; */
+    @include flex-column-align-center;
+    color: var(--biege);
     height: 75vh;
     border-right: 1px solid hsla(244, 11%, 50%, 0.469);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 #profile-icon-container1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @include flex-column-full-center;
     padding: 0;
     margin: 0;
 }
@@ -39,32 +34,26 @@
 #main-content {
     color: var(--beige);
     padding: 5px;
+
+    input {
+        @include main-palette-inverse;
+        width: 100%;
+        outline-width: 2px;
+    }
+    h3,h2 {
+        padding: 20px 0;
+    }
 }
 
-#main-content input {
-    background-color: var(--bg);
-    border: 2px solid var(--fg);
-    width: 100%;
-    color: var(--fg);
-}
 
-#main-content h2, #main-content h3 {
-    padding: 20px 0;
-}
 
 #sidebar-likes {
     outline: none;
-    color: white;
+    color: var(--biege);
     text-decoration: none;
     padding: 10px;
     border-radius: 10px;
 
-}
-
-#sidebar-likes:hover, #sidebar-heading:hover {
-    background-color: hsla(244, 11%, 50%, 0.318);
-    cursor: pointer;
-    
 }
 
 
@@ -79,9 +68,9 @@
     margin: 0;
     padding: 10px;
     text-decoration: none;
-    color: white;
+    color: var(--beige);
     border-radius: 10px;
-    margin-left: 40px;
+    // margin-left: 40px;
 }
 
 
@@ -89,7 +78,6 @@
     padding: 0;
     margin: 0;
     font-size: 1.25rem;
-    /* border: 1.5px solid white; */
     background-color: rgba(34, 33, 33, 0.582);
     border-radius: 100%;
 }
@@ -109,20 +97,18 @@
     position: relative;
     bottom:29px;
     padding: 3px 55px;
-    background-color: hsla(257, 64%, 2%, 0.644);
+    background-color: var(--bg);
 }
 
-/* .likes-img {
-    width: "20px";
-    opacity: "0.75";
-    border-radius: "20%";
-    margin: "20px";
-} */
-
 .main-content-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-full-center;
+    h5{
+        margin: 20px;
+        cursor: pointer;
+    }
+    #sidebar-likes:hover,#sidebar-heading:hover{
+        outline: solid 2px var(--beige);
+    }
 }
 
 
@@ -136,26 +122,18 @@
 }
 
 #edit-profile input {
+    @include main-palette-inverse;
     margin: 20px 20px 30px 0;
     border-radius: 10px;
     padding: 10px 5px;
     font-size: 0.75rem;
-    color: white;
+    outline-width: 2px;
 }
 
-#main-content-nav .active {
-    border-bottom: 2px solid white;
-}
-
-#sidebar-likes.active,
-#sidebar-heading.active {
-  border-bottom: 2px solid white ;
-  border-radius: 0;
-}
-
-#sidebar-likes.active:hover,
-#sidebar-heading.active:hover {
-    background-color: var(--bg);
+.active {
+    background-color: var(--active);
+    border-bottom: 2px solid var(--biege) ;
+    border-radius: 0;
 }
 
 #profile-email {
@@ -164,13 +142,10 @@
 
 #edit-profile button, 
 #likes-container button {
+    @include main-palette;
     padding: 0.30rem 1.5rem;
     font-size: 0.7rem;
     text-decoration: none;
-    background-color: #009688;
-    outline: solid 1px var(--outlinefocus);
-    color: aliceblblue;
-    font-family: 'Space Grotesk', sans-serif;
     border-radius: 100px;
     font-size: 1rem;
     z-index: 1;
@@ -179,9 +154,9 @@
 
 #edit-profile button:hover,
 #likes-container button:hover {
-    color: #009688;
+    @include main-palette-inverse;
     cursor: pointer;
-    background-color: aliceblue;
+    outline-width: 2px;
 }
 
 #profile-imgs {

@@ -14,12 +14,12 @@ const NavBar = () => {
 
   const activeStyle = {
     outline: "solid 2px #FAF8F2",
-    backgroundColor: "var(--outline)",
+    backgroundColor: "var(--bg)",
   };
 
   const mobileStyle = {
     outline: "solid 2px #FAF8F2",
-    backgroundColor: "var(--outline)",
+    backgroundColor: "var(--bg)",
   }
 
   const navActive = ({ isActive }) => (isActive ? activeStyle : undefined);

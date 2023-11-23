@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { useLocation, Link } from "react-router-dom";
-import "./NotFound.css";
+import "./NotFound.scss";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 

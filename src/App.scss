@@ -1,0 +1,141 @@
+@import "./components/Styles/mixins/flex";
+
+:root{
+  --bg: #14080E;
+  --outline: rgba(20,8,14);
+  --outlinefocus: rgba(62,137,137);
+  --beige: #FAF8F2;
+  --darkbeige: #a5a4a3;
+  --font: 'Space Grotesk', sans-serif;
+  --active: hsla(244, 11%, 50%, 0.318);
+  font-size: 24px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+}
+
+
+
+/* styling for the page component - this is on the page where the room lives */
+.room {
+  @include flex-full-center;
+  width: 100%;
+  height: calc(100vh - 70px);
+
+}
+
+/* marker on the screen general styling - will add a second class to this so all are the same styling but will hold different information */
+.point {
+position: absolute;
+  top: 50%;
+  left: 50%;
+
+  &:hover .text {
+    opacity: 1;
+  }
+  .label {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #00000077;
+    color: var(--beige);
+    font-family: var(--font);
+    text-align: center;
+    line-height: 40px;
+    font-weight: 100;
+    font-size: 18px;
+  }
+  .text {
+    /* display: none; */
+    position: absolute;
+    top: 30px;
+    left: -120px;
+    width: 200px;
+    padding: 20px;
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--beige);
+    line-height: 1.3em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-weight: 100;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+
+}
+
+/* hovering over marker text */
+// .point:hover .text {
+//   opacity: 1;
+// }
+
+/* styling of the label - this is the number it is */
+// .point .label {
+// position: absolute;
+// top: -20px;
+// left: -20px;
+// width: 40px;
+// height: 40px;
+// border-radius: 50%;
+// background: #00000077;
+// color: #ffffff;
+// font-family: var(--font);
+// text-align: center;
+// line-height: 40px;
+// font-weight: 100;
+// font-size: 18px;
+// }
+
+/* styling of the text itself (when hovered on) */
+// .point .text {
+//   /* display: none; */
+//   position: absolute;
+//   top: 30px;
+//   left: -120px;
+//   width: 200px;
+//   padding: 20px;
+//   border-radius: 4px;
+//   background: #00000077;
+//   color: #ffffff;
+//   line-height: 1.3em;
+//   font-family: Arial, Helvetica, sans-serif;
+//   text-align: center;
+//   font-weight: 100;
+//   font-size: 14px;
+//   opacity: 0;
+//   transition: opacity 0.3s;
+// }
+
+
+.like-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+
+::-webkit-scrollbar-track{
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb{
+  background: var(--beige);
+  border-radius: 25px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: var(--darkbeige);
+}

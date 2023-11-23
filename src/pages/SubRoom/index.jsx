@@ -1,5 +1,5 @@
 import React, {useState, useEffect,useRef } from 'react'
-import { Room, StylesComponent, BackButton, LikeButton } from '../../components'
+import { Room, BackButton, LikeButton } from '../../components'
 import { AiFillEye } from 'react-icons/ai'
 import './explore.scss'
 import { useAuth, useRoom } from '../../contexts';
@@ -34,37 +34,6 @@ const SubRoom = () => {
       setSelectedImage(null);
       setSelectedImageIndex(null)
     };
-  
-// new Array(roomArray.length).fill(false)
-
-  //  useEffect(() => {
-  //   try{
-  //     const newImagesWithStyles = roomArray.map((image, index) => ({
-  //       ...image,
-  //       clickCount: image.clickCount || 0,  
-  //       style: <StylesComponent seed={index} />,
-  //     }));
-  //     setImagesWithStyles(newImagesWithStyles);
-  //     setLikedImages(new Array(roomArray.length).fill(false))
-  //   }catch (error){
-  //     console.log("");
-  //   }
-
-  // }, [roomArray]);
-    
-  // const sendLikeData = async (user, roomId) => {
-  //   try {
-  //     const response = await axiosInstance.post('/likes', { user_id: user, room_id: roomId });
-  
-  //     if (!response.data) {
-  //       throw new Error('Failed to send data');
-  //     }
-  
-  //     console.log('Like created', response.data);
-  //   } catch (error) {
-  //     console.error("There was an error sending data:", error);
-  //   }
-  // };
 
   async function callRooms(){
     const call = await axiosInstance.get(`/rooms/${room}`).then(data => {
