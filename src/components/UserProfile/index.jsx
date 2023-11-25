@@ -8,7 +8,7 @@ import { useAuth } from '../../contexts';
 
 const UserProfile = ({ user, userRooms, loading, updateUser, imageUrl1, setImageUrl1, setRefresh }) => {
   const inputRef = useRef(null)
-  // const [image, setImage] = useState(null)
+
   const [newUsername, setNewUsername] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [editProfileVisible, setEditProfileVisible] = useState(false)
@@ -136,7 +136,7 @@ const UserProfile = ({ user, userRooms, loading, updateUser, imageUrl1, setImage
                     />
                   ) : (
                     // <FontAwesomeIcon icon={faUser} id='profile-icon' />
-                    <img src="https://interior-cloud-store.s3.amazonaws.com/avatar-images/profile.png" id='profile-icon' style={{ borderRadius: "100%", maxWidth: '8rem', maxHeight: '8rem'}} alt="" />
+                    <img src="https://interior-cloud-store.s3.amazonaws.com/avatar-images/profile.png" id='profile-icon' style={{ borderRadius: "100%", width: '8rem', height: '8rem'}} alt="" />
                   )}
                     {/* <img src="src/assets/images/profile.png" alt="" /> */}
 
@@ -194,7 +194,7 @@ const UserProfile = ({ user, userRooms, loading, updateUser, imageUrl1, setImage
                     <div id='user-rooms-container' style={createdRooms.length < 1 ? {"display":"flex","alignItems":"center"} : {}}>
                       {createdRooms.length < 1
                       ? (
-                        <p>You have not posted any rooms.<br></br> <Link to={`/create`}><button>Create A Room</button></Link></p>
+                        <p>You have not posted any rooms. <Link to={`/create`}><button>Create A Room</button></Link></p>
                       ) 
                       : (
                         createdRooms.map((room, index) => (
@@ -241,7 +241,7 @@ const UserProfile = ({ user, userRooms, loading, updateUser, imageUrl1, setImage
                     <div id="likes-container" style={likedRooms.length < 1 ? {"display":"flex","alignItems":"center"} : {}}>
                       {likedRooms.length < 1
                       ? (
-                        <p>You have not liked any rooms.<br></br>
+                        <p>You have not liked any rooms.
                           <Link to={`/explore`}>
                             <button>Find Rooms</button>
                           </Link>

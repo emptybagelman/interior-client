@@ -1,20 +1,16 @@
-import React, {useState, useEffect,useRef } from 'react'
+import React, {useState, useEffect,useRef, useCallback } from 'react'
 import { Room, BackButton, LikeButton } from '../../components'
-import { AiFillEye } from 'react-icons/ai'
 import './explore.scss'
 import { useAuth, useRoom } from '../../contexts';
 import axiosInstance from '../../helpers';
 import {GrClose} from 'react-icons/gr'
 
 const SubRoom = () => {
-    const { user } = useAuth();
 
-    const { room } = useRoom();
+  const { room } = useRoom();
 
     const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
-    const [roomArray,setRoomArray] = useState(null)
-
-    const [roomArrayData, setRoomArrayData] = useState(null)
+    const [roomArray,setRoomArray] = useState([])
 
     // const [likedImages, setLikedImages] = useState(null);
     const [imagesWithStyles, setImagesWithStyles] = useState([])
@@ -22,9 +18,7 @@ const SubRoom = () => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   
     const handleImageClick = (image, index) => {
-      // document.body.style.overflow = 'hidden';
       const updatedImages = [...imagesWithStyles];
-      //updatedImages[index].clickCount += 1;
       setImagesWithStyles(updatedImages);
       setSelectedImage(image);
       setSelectedImageIndex(image.id);
@@ -35,46 +29,30 @@ const SubRoom = () => {
       setSelectedImageIndex(null)
     };
 
-  async function callRooms(){
+
+  
+  const callRoomImages = useCallback(async () => {
     const call = await axiosInstance.get(`/rooms/${room}`).then(data => {
       const rooms = data.data.data
-      setRoomArrayData(rooms)
-    })
-  }
-  
-  async function callRoomImages(){
-    const call = await axiosInstance.get("/rooms").then(data => {
-      const rooms = data.data.rooms
-      const tempArr = []
-      let counter = 0
-      for(let i=0;i<rooms.length;i++){
-        if(rooms[i].category === room){
-          let roomTemp = ""
-  
-          if(rooms[i].name.includes(" ")){
-            roomTemp = rooms[i].name.split(" ").join("_")
-          }else{
-            roomTemp = rooms[i].name
-          }
 
-          rooms[i].src = `https://res.cloudinary.com/de2nposrf/image/upload/${room}/${rooms[i].user_id}/${roomTemp}/nz.png`
-          rooms[i].alt = 'Image 1'
-          tempArr.push(rooms[i])
-          counter += 1
-        }
+      const tempArr = [];
+
+      for(let roomC of rooms){
+        roomC.src = `https://res.cloudinary.com/de2nposrf/image/upload/${room}/${roomC.user_id}/${roomC.name}/nz.png`
+        roomC.alt = `Image ID: ${roomC.id}`
+        tempArr.push(roomC)
       }
-      setRoomArray(tempArr)
+      if(tempArr.length > 0){
+        setRoomArray(tempArr)
+      }
     })
-  
-  
-  }
+  },[])
 
   useEffect(() => {
     window.scrollTo(0, 0);
   },[])
   
   useEffect(() => {
-    callRooms()
     callRoomImages()
   },[])
     
@@ -82,51 +60,44 @@ const SubRoom = () => {
       <div className='overflow-hiding'>
           <div className='title-section'>
             <h1 className='room-title'>{room} Inspiration</h1>
-            <BackButton backTo="/explore" label="Back to Explore" />
+            <BackButton backTo="/explore" label="Back to Explore" styling={roomArray.length <= 0 ? {"display":"none"} : {}}/>
           </div>
       
-      <div className={`page${selectedImage ? ' dimmed' : ''}`}>
+      <div className={`page${selectedImage ? ' dimmed' : ''}`} style={roomArray.length <= 0 ? {"display":"block"} : {}}>
 
           { 
-          roomArray 
-          ? 
-          roomArray.map((image, index) => (
-            <div className="item-container" 
-              key={index} 
-              onClick={() => handleImageClick(image, index)}
-              onMouseEnter={() => setHoveredImageIndex(image.id)}
-              onMouseLeave={() => setHoveredImageIndex(null)}
-            >
-            <img className='item' src={image.src} alt={image.alt} />
-            <div className="item-caption">
-              <div>
-                <h3>{image.name.split("_").join(" ")}</h3>
-                {
-                  hoveredImageIndex ?                 
-                  <>
-                    <p>Dimensions: {image.dimensions}</p>
-                    <p>Description: {image.description}</p>
-                    <p>Theme: {image.theme}</p>
-                  </>
-                  : ""
-                }
-              </div>
-              <LikeButton imageId={image.id} user_id={image.user_id} />
-              {/* {hoveredImageIndex ? <LikeButton imageId={image.id} user_id={image.user_id} /> : ""} */}
-            </div>
-        
-        
-           </div>
-          ))
-          :
-          roomArrayData && roomArrayData.map((room,index) => (
-            <div className="item-container" key={index}>
-              <img className="item" src="./src/assets/tempimg.png" alt="" />
+
+            roomArray.length > 0 ? roomArray.map((image, index) => (
+              <div className="item-container" 
+                key={index} 
+                onClick={() => handleImageClick(image, index)}
+                onMouseEnter={() => setHoveredImageIndex(image.id)}
+                onMouseLeave={() => setHoveredImageIndex(null)}
+              >
+              <img className='item' src={image.src} alt={image.alt} />
               <div className="item-caption">
-                <h3>{room.name.split("_").join(" ")}</h3>
+                <div>
+                  <h3>{image.name.split("_").join(" ")}</h3>
+                  {
+                    hoveredImageIndex === image.id ?                 
+                    <>
+                      <p>Dimensions: {image.dimensions}</p>
+                      <p>Description: {image.description}</p>
+                      <p>Theme: {image.theme}</p>
+                    </>
+                    : ""
+                  }
+                </div>
+                <LikeButton imageId={image.id} user_id={image.user_id} />
               </div>
             </div>
-          ))
+            ))
+            :
+            <div id='room-not-found-wrapper'>
+              <h3>There aren't any {room}s!</h3>
+              <BackButton backTo="/explore" label="Back to Explore"/>
+
+            </div>
       }
     
     

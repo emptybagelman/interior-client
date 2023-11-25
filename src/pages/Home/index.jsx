@@ -1,62 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import Environment from "../../components/Homepage/Environment";
 import "./home.scss";
 import * as THREE from "three";
-import { OrbitControls, useScroll } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { House } from "../../components/Homepage";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
 
 const box = new THREE.BoxGeometry();
 const cyl = new THREE.CylinderGeometry(1, 1, 2, 20);
 const tri = new THREE.CylinderGeometry(1, 1, 2, 3);
 
-const FLOOR_HEIGHT = 2.3;
-
-export default function Home() {
-  /*
-  const animateHouseOnScroll = (houseRef, scroll) => {
-  // Define your animation timeline using GSAP
-  const tl = gsap.timeline();
-
-  // Add animation steps to the timeline
-  tl.to(houseRef.current.position, {
-    duration: 1, // Animation duration in seconds
-    y: -scroll * 2, // Adjust the animation based on scroll value
-    ease: 'power3.out', // Easing function (optional)
-  });
-
-  // Optionally, you can add more animations to the timeline
-
-  // Return the timeline
-  return tl;
-};
-
-    const scroll = useScroll();
-    const tl = useRef();
-    const ref = useRef();
-
-    useFrame(() => {
-      tl.current.seek(scroll.offset * tl.current.duration())
-    })
-
-    useLayoutEffect(() => {
-      tl.current = gsap.timeline();
-    
-      tl.current.to(
-        ref.current.position,
-        {
-          duration: 2,
-          y: -20,
-        },
-        0
-      )
-    }, []);
-
-    const houseColors = ['#FF5733', '#33FF57', '#5733FF', '#FFFF33'];
-    //const colorIndex = Math.floor(scrollY / (window.innerHeight / houseColors.length));
-    */
+export default function Home() { 
 
   const [scrollY, setScrollY] = useState(0);
 

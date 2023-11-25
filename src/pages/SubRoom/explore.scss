@@ -180,31 +180,11 @@ body{
   margin: 20px;
 }
 
-// .email-button {
-//   width: 54px;
-//   height: 50px;
-   
-//   border-radius: 30px;
-//   background-color: #009688;
-//   outline: solid 1px var(--bg);
-//   font-size: 0.9em;
-//   justify-content: center;
-//   align-items: center;
-//   margin-top: 24px;
-//   margin-left: -32px;
-// }
-
 .comments-button:hover{
   cursor: pointer;
   filter: invert(1);
   
 }
-
-// .email-button:hover{
-//   cursor: pointer;
-//   background-color: var(--beige);
-//   /* outline: solid 2px var(--outlinefocus); */
-// }
 
 .center-page-room {
   @include flex-full-center;
@@ -287,12 +267,6 @@ body{
   object-fit: cover;
   border-radius: 20px;
   background-color: var(--beige);
-}
-
-.item-container:hover{
-  transform: scale(0.98);
-  transition: transform 0.2s ease-in-out;
-
 }
 
 .fullscreen-div {
@@ -417,6 +391,15 @@ body{
   border-radius: 50px;
   z-index: 10; 
   font-family: var(--font);
+}
+
+#room-not-found-wrapper{
+  @include flex-column-full-center;
+  width: 100%;
+  h3{
+    color: var(--beige);
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 767px) {

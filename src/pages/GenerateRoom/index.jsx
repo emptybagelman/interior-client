@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { loadImage } from "canvas"
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import "./style.scss"
 import { useAuth } from '../../contexts'
 import axiosInstance from "../../helpers"
@@ -19,15 +18,16 @@ const GenerateRoom = () => {
     const [theme, setTheme] = useState("")
     const [select,setSelect] = useState("Bedroom")
     const [imageTypeSelect,setImageTypeSelect] = useState(false)
-    const [returnURL,setReturnURL] = useState("")
-    const [files, setFiles] = useState([])
 
-    const [px,setPx] = useState([])
-    const [nx,setNx] = useState([])
-    const [py,setPy] = useState([])
-    const [ny,setNy] = useState([])
-    const [pz,setPz] = useState([])
-    const [nz,setNz] = useState([])
+    const [pos, setPos] = useState({
+        px:"",
+        nx:"",
+        py:"",
+        ny:"",
+        pz:"",
+        nz:""
+    })
+
 
     const [context,setContext] = useState("")
     const [imageArrayData,setImageArrayData] = useState([])
@@ -50,14 +50,10 @@ const GenerateRoom = () => {
     const completedRef = useRef()
 
     const navigate = useNavigate()
-    
-    const cloudinaryURL = ""
-
-    const positions = ["pz","nz","px","nx","py","ny"]
 
     const cubeMapStyle = {
         "width": "800px",
-        "min-height": "600px",
+        "minHeight": "600px",
         "position": "relative",
         "border": "1px solid #888",
         "background": "var(--beige)",
@@ -65,7 +61,7 @@ const GenerateRoom = () => {
 
       const cubeMapStyleSmall = {
         "width": "400px",
-        "min-height": "300px",
+        "minHeight": "300px",
         "position": "relative",
         "border": "1px solid #888",
         "background": "var(--beige)",
@@ -110,7 +106,6 @@ const GenerateRoom = () => {
         }
 
         setDownload(url, fileExtension) {
-
             this.anchor.href = url;
             this.anchor.download = `${this.faceName}.${fileExtension}`;
             this.img.style.filter = '';
@@ -124,7 +119,6 @@ const GenerateRoom = () => {
     }
 
     function getDataURL(imgData) {
-
         canvas.current.width = imgData.width;
         canvas.current.height = imgData.height;
         context.putImageData(imgData, 0, 0);
@@ -170,17 +164,6 @@ const GenerateRoom = () => {
         processImage(data);
         // });
     }
-
-    // function addImageProcess(src){
-    //     return new Promise((resolve,reject) => {
-    //         let img = new Image()
-    //         img.onload = () => {
-    //             resolve({width:img.width,height:img.height})
-    //             img.onerror = reject
-    //             img.src = src
-    //         }
-    //     })
-    // }
 
     function processImage(data) {
         removeChildren(facesRef.current);
@@ -273,7 +256,6 @@ const GenerateRoom = () => {
         const sortedArray = []
         const formData = new FormData()
         const posPositions = ["px","nx","py","ny","pz","nz"]
-        // const uploadPromises = []
 
 
         if(imageTypeSelect){
@@ -292,7 +274,7 @@ const GenerateRoom = () => {
 
 
         }else{
-            imgs = [px,nx,py,ny,pz,nz]
+            imgs = [pos.px,pos.nx,pos.py,pos.ny,pos.pz,pos.nz]
             for(let i=0;i<imgs.length;i++){
                 const file = imgs[i]
                 const blob = await readFileAsBlob(file)
@@ -301,17 +283,7 @@ const GenerateRoom = () => {
             }
         }
 
-        // for(let i=0;i<sortedArray.length;i++){
-        //     const filesFormData = new FormData()
-        //     const imgBlobURLToSend = sortedArray[i]
-        //     const response = await fetch(imgBlobURLToSend);
-        //     const blob = await response.blob();
-        //     const dynamicPath = `${user}/${filename}/${posPositions[i]}`
-        //     filesFormData.append("file",blob)
-        //     filesFormData.append("public_id",dynamicPath)
-        //     filesFormData.append("upload_preset","de2nposrf")
-        //     uploadPromises.push(filesFormData)
-        // } 
+
         let extractedString = ""
         const uploadPromises = sortedArray.map(async (blobURL,index) => {
             const fileForm = new FormData()
@@ -335,8 +307,6 @@ const GenerateRoom = () => {
 
         })
 
-        setReturnURL(extractedString)
-        console.log(extractedString);
         let name = ""
         if(filename.includes(" ")){
             name = filename.split(" ").join("_")
@@ -380,79 +350,55 @@ const GenerateRoom = () => {
         if(complete){
             try {
                 disableForm(true)
-                postToRoomTable().then(resp => {
-                    const room_id = resp
-                    submitRef.current.style.display = "none"
-                    homeBtnRef.current.style.display = "block"
-                    completedRef.current.style.display = "block"
-                    clearFields()
-                })
+                await postToRoomTable()
+                submitRef.current.style.display = "none"
+                homeBtnRef.current.style.display = "block"
+                completedRef.current.style.display = "block"
+                clearForm()
             
             } catch (error) {
                 console.log(error)
             }
         }else{
-            // await getUserData()
             console.log(user,"Not done yet")
         }
-
-
     }
 
 
-    const getUserData = async () => {
-        try {
-            const resp = await axiosInstance.get(`/users/${user}`,{
-                method:"GET",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            const data = await resp.data.data
-            console.log(data)
-        } catch (error) {
-            console.log("Whoopsie",error)
-        }
-    }
+    // const getUserData = async () => {
+    //     try {
+    //         const resp = await axiosInstance.get(`/users/${user}`,{
+    //             method:"GET",
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         })
+    //         const data = await resp.data.data
+    //         console.log(data)
+    //     } catch (error) {
+    //         console.log("Whoopsie",error)
+    //     }
+    // }
 
-    function clearFields(){
+    const clearValues = useCallback((arr) => {
+        arr.forEach((ref) => (ref.current ? ref.current.value  = "" : ""))
+    },[])
+
+    const disableFields = useCallback((arr) => {
+        arr.forEach((ref) => (ref.current ? ref.current.disabled  = true : ""))
+    },[])
+
+    function clearForm(){
         if(imageTypeSelect){
-            imageInputRef.current.value = ""
-        }else{
-            cubemapRefs.current[0].current.value = ""
-            cubemapRefs.current[1].current.value = ""
-            cubemapRefs.current[2].current.value = ""
-            cubemapRefs.current[3].current.value = ""
-            cubemapRefs.current[4].current.value = ""
-            cubemapRefs.current[5].current.value = ""
-
+            clearValues([imageInputRef,cubemapRefs.current[0],cubemapRefs.current[1],cubemapRefs.current[2],cubemapRefs.current[3],cubemapRefs.current[4],cubemapRefs.current[5],filenameInputRef,dimRef,descRef,themeRef,dropdownRef,submitRef])
         }
-        filenameInputRef.current.value = ""
-        dimRef.current.value = ""
-        descRef.current.value = ""
-        themeRef.current.value = ""
-        dropdownRef.current.value = ""
-        submitRef.current.value = ""
+
     }
 
     function disableForm(truthy){
-        if(imageTypeSelect){
-            imageInputRef.current.disabled = truthy
-        }else{
-            cubemapRefs.current[0].current.disabled = truthy
-            cubemapRefs.current[1].current.disabled = truthy
-            cubemapRefs.current[2].current.disabled = truthy
-            cubemapRefs.current[3].current.disabled = truthy
-            cubemapRefs.current[4].current.disabled = truthy
-            cubemapRefs.current[5].current.disabled = truthy
-
+        if(imageTypeSelect && truthy){
+            disableFields([imageInputRef,cubemapRefs.current[0],cubemapRefs.current[1],cubemapRefs.current[2],cubemapRefs.current[3],cubemapRefs.current[4],cubemapRefs.current[5],filenameInputRef,dimRef,descRef,themeRef,dropdownRef,submitRef])
         }
-        filenameInputRef.current.disabled = truthy
-        dimRef.current.disabled = truthy
-        descRef.current.disabled = truthy
-        themeRef.current.disabled = truthy
-        dropdownRef.current.disabled = truthy
-        submitRef.current.disabled = truthy
     }
 
     function goHome(){
@@ -468,20 +414,7 @@ const GenerateRoom = () => {
 
     function handleCube(e,pos){
         const file = e.target.files[0]
-            switch (pos){
-                case "px":
-                    setPx(file)
-                case "nx":
-                    setNx(file)
-                case "py":
-                    setPy(file)
-                case "ny":
-                    setNy(file)
-                case "pz":
-                    setPz(file)
-                case "nz":
-                    setNz(file)
-            }
+            setPos(prev => ({...prev, [pos]:file}))
         }
     
 
@@ -525,7 +458,7 @@ const GenerateRoom = () => {
         submitRef.current.style.display = "block"
         homeBtnRef.current.style.display = "none"
         completedRef.current.style.display = "none"
-        clearFields()
+        clearForm()
     },[imageTypeSelect])
 
     useEffect(() => {

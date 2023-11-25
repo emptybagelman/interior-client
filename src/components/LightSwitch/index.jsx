@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react'
+import React,{ useState, useEffect, useMemo } from 'react'
 import sound from "../../assets/audio/lightswitch.wav"
 import "./style.scss"
 import { useAuth } from '../../contexts'
@@ -39,15 +39,15 @@ const LightSwitch = ({ changeState, toggleSwitch }) => {
         setStyle({"transform":"translateY(0px)"})
     }
 
+    function handleCord(){
+      if(width <= 1280){
+        setUsePull(true)
+      }else{
+        setUsePull(false)
+      }
+    }
 
     useEffect(() => {
-      function handleCord(){
-        if(width <= 1280){
-          setUsePull(true)
-        }else{
-          setUsePull(false)
-        }
-      }
       handleCord()
     }, [width]);
 

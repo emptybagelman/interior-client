@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useRef } from 'react'
+import React,{ useState, useEffect, useRef, useCallback } from 'react'
 import { LoginCard, LightSwitch, SignupCard } from "../../components"
 import "./style.scss"
 import sound from "../../assets/audio/lightswitch.wav"
@@ -16,9 +16,9 @@ const Login = () => {
 
   }
 
-  function playAudio() {
+  const playAudio =  useCallback(() => {
     new Audio(sound).play()
-  }
+  },[])
 
   function changeState() {
     setToggleSwitch(!toggleSwitch)
@@ -38,12 +38,10 @@ const Login = () => {
   return (
     <div id='login-page' onKeyDown={keyboardSwitch} tabIndex={0} aria-label='Press space to switch between login and register'>
 
-{/*  cardHeight={cardHeight} */}
         <LoginCard changeState={changeState} toggleSwitch={toggleSwitch} focusStyle={focusStyle} />
 
         { width > 850 ? <LightSwitch changeState={changeState} toggleSwitch={toggleSwitch}/> : "" }
 
-{/*  cardHeight={cardHeight} */}
         <SignupCard changeState={changeState} toggleSwitch={toggleSwitch} focusStyle={focusStyle} setToggleSwitch={setToggleSwitch}/>
     </div>
   )

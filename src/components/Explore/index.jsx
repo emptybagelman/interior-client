@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.scss'; 
 import { motion } from 'framer-motion';
@@ -16,6 +16,15 @@ const items = [
 const ExploreItems = () => {
 
   const { setRoom } = useRoom()
+
+  const items = useMemo(() => ([
+    { image: 'https://res.cloudinary.com/de2nposrf/image/upload/v1697033543/static/bedroom.png', title: 'Bedroom'},
+    { image: 'https://res.cloudinary.com/de2nposrf/image/upload/v1697033545/static/studio.png', title: 'Studio'},  
+    { image: 'https://res.cloudinary.com/de2nposrf/image/upload/v1697033543/static/kitchen.png', title: 'Kitchen'},
+    { image: 'https://res.cloudinary.com/de2nposrf/image/upload/v1697033544/static/garden.png', title: 'Garden'}, 
+    { image: 'https://res.cloudinary.com/de2nposrf/image/upload/v1697033542/static/bathroom.png', title: 'Bathroom'}, 
+    { image: 'https://res.cloudinary.com/de2nposrf/image/upload/v1697033544/static/livingroom.png', title: 'Living'}, 
+  ]),[])
 
   const navigate = useNavigate()
 

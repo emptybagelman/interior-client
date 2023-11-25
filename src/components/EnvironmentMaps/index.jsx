@@ -1,24 +1,14 @@
-import React, { useEffect, useRef, useState, useContext } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import * as THREE from 'three';
-import * as dat from 'lil-gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
- 
-import Heart from "react-animated-heart";
-import axiosInstance from '../../helpers'
-import { Canvas } from '@react-three/fiber';
 import { AiOutlineComment } from 'react-icons/ai'
-
 import { useAuth } from '../../contexts/index.jsx';
-import Room from '../Room';
-import EmailButton from '../Email';
 import { Comments, LikeButton } from "../../components"
 
 
 const EnvironmentMap = ({ mapUrls, roomId, user_id }) => {
 
   const containerRef = useRef(null);
-  const [isClick, setClick] = useState(false);
   const [showComments, setShowComments] = useState(false);
 
   const handleCommentsToggle = () => {
@@ -27,43 +17,15 @@ const EnvironmentMap = ({ mapUrls, roomId, user_id }) => {
 
   const { user, width } = useAuth();
 
-  const handleLike = async () => {
-    
-    setClick(prev => !prev);
-   
-    const likeData = {
-        user_id: user,
-        room_id: roomId
-    };
-    
-    try {
-        const response = await axiosInstance.post('/likes', likeData);
-        console.log('Like created', response.data);
-    } catch (error) {
-        console.error('Error creating like:', error);
-
-       
-        setClick(prev => !prev);  
+  const sizes = useMemo(() => {
+    return {
+      width: containerRef.current?.clientWidth,
+      height: containerRef.current?.clientHeight
     }
-}
+  },[mapUrls]);
 
-  
-
-  useEffect(() => {
-    const container = containerRef.current;
-    
-
-    const global = {};
-
-    const canvas = document.createElement('canvas');
-    container.appendChild(canvas);
-
-
+  const setupScene = useCallback((canvas) => {
     const scene = new THREE.Scene();
-    const sizes = {
-      width: container.clientWidth,
-      height: container.clientHeight,
-    };
 
     const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
     camera.position.set(4, 5, 4);
@@ -79,20 +41,9 @@ const EnvironmentMap = ({ mapUrls, roomId, user_id }) => {
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    
-const updateAllMaterials = () =>
-{
-    scene.traverse((child) =>
-    {
-        if(child.isMesh && child.material.isMeshStandardMaterial)
-        {
-            child.material.envMapIntensity = global.envMapIntensity
-        }
-    })
-}
 
- scene.backgroundBlurriness = 0 
-scene.backgroundIntensity = 1 
+    scene.backgroundBlurriness = 0 
+    scene.backgroundIntensity = 1 
 
 
     const environmentMap = new THREE.CubeTextureLoader().load(mapUrls);
@@ -110,6 +61,17 @@ scene.backgroundIntensity = 1
 
     tick();
 
+    return {tick:tick, controls:controls, renderer:renderer, sizes:sizes, camera:camera}
+
+  },[mapUrls])
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const canvas = document.createElement('canvas');
+    container.appendChild(canvas);
+
+    const {tick,controls,renderer,sizes,camera} = setupScene(canvas)
     
     const onResize = () => {
       sizes.width = container.clientWidth;
@@ -123,14 +85,14 @@ scene.backgroundIntensity = 1
     window.addEventListener('resize', onResize);
 
     return () => {
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
-  }
-  cancelAnimationFrame(tick);
-  window.removeEventListener('resize', onResize);
-  controls.dispose();
-  renderer.dispose();
-};
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+      cancelAnimationFrame(tick);
+      window.removeEventListener('resize', onResize);
+      controls.dispose();
+      renderer.dispose();
+    };
   }, [mapUrls]);
 
   

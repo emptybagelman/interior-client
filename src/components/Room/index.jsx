@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import EnvironmentMap from '../EnvironmentMaps';
 import { AuthProvider } from '../../contexts';
 import { BlobToImage } from "../../components"
 import "./style.scss"
 
 const Room = ( {mapSet, initialMapIndex = 0, user_id, room_name, roomType} ) => {
-  const [currentMapIndex, setCurrentMapIndex] = useState(initialMapIndex);
+
   const pageRefs = useRef([React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),React.createRef(),])
+
   const imageURLs = [
     `https://res.cloudinary.com/de2nposrf/image/upload/v1697033232/${roomType}/${user_id}/${room_name}/px.png`,
     `https://res.cloudinary.com/de2nposrf/image/upload/v1697033232/${roomType}/${user_id}/${room_name}/nx.png`,
@@ -21,22 +22,14 @@ const Room = ( {mapSet, initialMapIndex = 0, user_id, room_name, roomType} ) => 
   const [loadedVar,setLoadedVar] = useState(false)
 
 
-  const loading = [
+  const loading = useMemo(() => ([
     "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
     "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
     "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
     "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
     "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
     "https://res.cloudinary.com/de2nposrf/image/upload/v1697042090/static/loading/loading.png",
-  ]
-
-  const prevMap = () => {
-    setCurrentMapIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : maps.length - 1));
-};
-
-const nextMap = () => {
-    setCurrentMapIndex((prevIndex) => (prevIndex < maps.length - 1 ? prevIndex + 1 : 0));
-};
+  ]),[])
 
 
   useEffect(() => {

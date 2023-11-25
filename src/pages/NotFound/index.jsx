@@ -12,11 +12,11 @@ const NotFound = () => {
       <div id="section">
         <div id="container">
           <div id="left">
-            <h1 id="h1">Opps! Page not found! </h1>
+            <h1 id="h1">Whoops! Page not found. </h1>
 
-            <p id="p">Description</p>
+            <p id="p">Looks like we didn't know where to send you!<br/> Let's get you home.</p>
             <Link to={"/"}>
-              <button id="button_notfound">Go back to Home Page</button>
+              <button id="button_notfound">Go Home</button>
             </Link>
           </div>
           <div id="right">
@@ -35,9 +35,6 @@ const NotFound = () => {
                 </Sphere>
               </Suspense>
             </Canvas>
-            <div id="img2">
-              {/* <img src="../../../src/assets/images/preview.png" /> */}
-            </div>
           </div>
         </div>
       </div>
@@ -46,10 +43,3 @@ const NotFound = () => {
 };
 
 export default NotFound;
-
-{
-  /*     
-    <h1 id="h1" >Page <span id="location">{location.pathname}</span> not found
-      </h1>
-      <Link to="/" id="location"> Home Page &rarr;</Link> */
-}
